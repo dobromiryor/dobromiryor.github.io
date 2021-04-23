@@ -17,27 +17,6 @@ const GlobalStyle = createGlobalStyle`
 
     a{
       color: var(--text);
-      position: relative;
-      padding: 2px;
-
-      &::before{
-        transition: 0.2s ease all;
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0px;
-        width: 100%;
-        height: 2px;
-        background-color: var(--link-decoration);
-        z-index: -1;
-      }
-
-      &:hover{
-        &::before{
-          height: 16px;
-          bottom: 3px;
-        }
-      }
     }
 
     /* Extra small devices (phones, 600px and down) */
@@ -60,8 +39,8 @@ const GlobalStyle = createGlobalStyle`
   @media (prefers-color-scheme: light) {
     :root {
       --text: #333;
-      --link-decoration: #808080;
       --background: #fff;
+      --mid-gray: #808080;
     }
   }
 
@@ -69,8 +48,8 @@ const GlobalStyle = createGlobalStyle`
   @media (prefers-color-scheme: dark) {
     :root{
       --text: #ccc;
-      --link-decoration: #808080;
       --background: #222;
+      --mid-gray: #808080;
     }
   }
 `
@@ -81,8 +60,8 @@ export default function Home() {
       <GlobalStyle />
       <Navigation />
       {/* Welcome */}
-      {/* Projects */}
       {/* About */}
+      {/* Projects */}
       {/* Contact */}
     </>
   )

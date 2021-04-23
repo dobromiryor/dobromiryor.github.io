@@ -1,3 +1,4 @@
+import { AnchorLink } from "gatsby-plugin-anchor-links"
 import React from "react"
 import styled from "styled-components"
 
@@ -10,13 +11,13 @@ const ExpandingSpan = styled.span`
   opacity: 0;
   letter-spacing: -10px;
 `
-const StyledLogo = styled.div`
+const StyledLogo = styled(AnchorLink)`
   padding: 2px;
   transition: 0.2s ease-in-out all;
   font-weight: 700;
+  text-decoration: none;
   border: 2px solid var(--text);
   border-radius: 2px;
-  cursor: default;
 
   &:hover ${ExpandingSpan} {
     opacity: 1;
@@ -24,9 +25,13 @@ const StyledLogo = styled.div`
   }
 `
 
-export default function Logo() {
+export default function Logo({ handleMenuClose }) {
   return (
-    <StyledLogo title="Dobromir Yordanov">
+    <StyledLogo
+      to="/"
+      title="Dobromir Yordanov"
+      onAnchorLinkClick={handleMenuClose}
+    >
       <ConstantSpan>d</ConstantSpan>
       <ExpandingSpan>obromir</ExpandingSpan>
       <ExpandingSpan> </ExpandingSpan>
