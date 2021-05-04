@@ -9,11 +9,12 @@ const ConstantSpan = styled.span`
 const ExpandingSpan = styled.span`
   transition: inherit;
   opacity: 0;
-  letter-spacing: -10px;
+  letter-spacing: -14px;
 `
 const StyledLogo = styled(AnchorLink)`
-  padding: 2px;
+  padding: 4px;
   transition: 0.2s ease-in-out all;
+  font-size: 1.5rem;
   font-weight: 700;
   text-decoration: none;
   border: 2px solid var(--text);
@@ -28,7 +29,7 @@ const StyledLogo = styled(AnchorLink)`
 export default function Logo({ handleMenuClose }) {
   return (
     <StyledLogo
-      to="/"
+      to="/#welcome"
       title="Dobromir Yordanov"
       onAnchorLinkClick={handleMenuClose}
     >

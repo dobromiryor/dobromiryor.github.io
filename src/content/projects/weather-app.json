@@ -1,0 +1,20 @@
+{
+  "title": "Weather App",
+  "description": "A weather PWA that shows weather conditions by search or by using the device's location. Made using React.",
+  "credits": [
+    {
+      "text": "Weather data and icons from ",
+      "name": "OpenWeatherMap",
+      "link": "https://openweathermap.org/"
+    }
+  ],
+  "link": "https://dobromiryor.github.io/weather-app/",
+  "stack": [
+    { "name": "HTML", "background": "e34c26", "color": "ffffff" },
+    { "name": "CSS", "background": "264de4", "color": "ebebeb" },
+    { "name": "JavaScript", "background": "f0db4f", "color": "323330" },
+    { "name": "React", "background": "61DBFB", "color": "1f232a" },
+    { "name": "PWA", "background": "5a0fc8", "color": "ffffff" }
+  ],
+  "slug": "weather-app"
+}

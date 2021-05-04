@@ -1,0 +1,204 @@
+{
+  "en": {
+    "firstName": "Dobromir",
+    "lastName": "Yordanov",
+    "city": "Plovdiv",
+    "country": "Bulgaria",
+    "website": "dobromiryor.github.io",
+    "email": "dobromir.yor@gmail.com",
+    "phone": "+359896896834",
+    "skills": {
+      "title": "Skills/Tools",
+      "list": [
+        "HTML",
+        "CSS",
+        "SCSS/SASS",
+        "JavaScript",
+        "jQuery",
+        "React",
+        "Gatsby",
+        "D3",
+        "Bootstrap",
+        "Git",
+        "Responsive Design",
+        "Adobe Photoshop",
+        "Adobe Illustrator"
+      ]
+    },
+    "languages": {
+      "title": "Languages",
+      "list": ["Bulgarian", "English"]
+    },
+    "experience": {
+      "title": "Relevant Experience",
+      "list": [
+        {
+          "company": "m+w MediaNetworks",
+          "position": "Front End Developer",
+          "period": "September 2019 - March 2020",
+          "tasks": [
+            "Turning design mockups into product pages.",
+            "Creating product banners following design guidelines.",
+            "Making shelf label templates from design mockups.",
+            "Refreshing, testing and bug fixing the company's website."
+          ]
+        }
+      ]
+    },
+    "education": {
+      "title": "Education",
+      "list": [
+        {
+          "field": "Business Information Technology",
+          "period": "2012 - 2018",
+          "school": "Plovdiv University \"Paisii Hilendarski\""
+        }
+      ]
+    },
+    "certifications": {
+      "title": "Certifications",
+      "list": [
+        {
+          "name": "Complete React Developer in 2020",
+          "date": "October 2020",
+          "link": "https://www.udemy.com/certificate/UC-a50c93b2-a0c1-46e7-a986-ef711df5d38c/"
+        },
+        {
+          "name": "FreeCodeCamp: D3 Data Visualization",
+          "date": "August 2020",
+          "link": "https://www.freecodecamp.org/certification/dobromiryor/data-visualization"
+        },
+        {
+          "name": "JavaScript: The Advanced Concepts",
+          "date": "July 2020",
+          "link": "https://www.udemy.com/certificate/UC-1f4179f9-e9fb-404d-a95c-b6ab2bc932d4/"
+        },
+        {
+          "name": "FreeCodeCamp - Front End Libraries",
+          "date": "May 2019",
+          "link": "https://www.freecodecamp.org/certification/dobromiryor/front-end-libraries"
+        },
+        {
+          "name": "The Complete Web Developer in 2019: Zero to Mastery",
+          "date": "April 2019",
+          "link": "https://www.udemy.com/certificate/UC-VWDU25B9/"
+        },
+        {
+          "name": "FreeCodeCamp - JavaScript Algorithms and Data Structures",
+          "date": "November 2018",
+          "link": "https://www.freecodecamp.org/certification/dobromiryor/javascript-algorithms-and-data-structures"
+        },
+        {
+          "name": "FreeCodeCamp - Responsive Web Design",
+          "date": "October 2018",
+          "link": "https://www.freecodecamp.org/certification/dobromiryor/responsive-web-design"
+        },
+        {
+          "name": "Cambridge English: First (FCE) – CEFR level B2",
+          "date": "July 2009"
+        }
+      ]
+    }
+  },
+  "bg": {
+    "firstName": "Добромир",
+    "lastName": "Йорданов",
+    "city": "Пловдив",
+    "country": "България",
+    "website": "dobromiryor.github.io",
+    "email": "dobromir.yor@gmail.com",
+    "phone": "+359896896834",
+    "skills": {
+      "title": "Умения/Инструменти",
+      "list": [
+        "HTML",
+        "CSS",
+        "SCSS/SASS",
+        "JavaScript",
+        "jQuery",
+        "React",
+        "Gatsby",
+        "D3",
+        "Bootstrap",
+        "Git",
+        "Responsive Design",
+        "Adobe Photoshop",
+        "Adobe Illustrator"
+      ]
+    },
+    "languages": {
+      "title": "Езици",
+      "list": ["Български", "Английски"]
+    },
+    "experience": {
+      "title": "Приложим опит",
+      "list": [
+        {
+          "company": "m+w MediaNetworks",
+          "position": "Front End Developer",
+          "period": "Септември 2019 - Март 2020",
+          "tasks": [
+            "Превръщане на дизайни в продуктови страници.",
+            "Създаване на продуктови банери следвайки дизайнерските насоки.",
+            "Изработване на шаблони за супермаркети по готов дизайн.",
+            "Обновяване, тестване и отстраняване на бъгове на уебсайта на комапнията."
+          ]
+        }
+      ]
+    },
+    "education": {
+      "title": "Образование",
+      "list": [
+        {
+          "field": "Бизнес информационни технологии",
+          "period": "2012 - 2018",
+          "school": "Пловдивски университет \"Паисий Хилендарски\""
+        }
+      ]
+    },
+    "certifications": {
+      "title": "Сертификати",
+      "list": [
+        {
+          "name": "Complete React Developer in 2020",
+          "date": "Октомври 2020",
+          "link": "https://www.udemy.com/certificate/UC-a50c93b2-a0c1-46e7-a986-ef711df5d38c/"
+        },
+        {
+          "name": "FreeCodeCamp: D3 Data Visualization",
+          "date": "Август 2020",
+          "link": "https://www.freecodecamp.org/certification/dobromiryor/data-visualization"
+        },
+        {
+          "name": "JavaScript: The Advanced Concepts",
+          "date": "Юли 2020",
+          "link": "https://www.udemy.com/certificate/UC-1f4179f9-e9fb-404d-a95c-b6ab2bc932d4/"
+        },
+        {
+          "name": "FreeCodeCamp - Front End Libraries",
+          "date": "Май 2019",
+          "link": "https://www.freecodecamp.org/certification/dobromiryor/front-end-libraries"
+        },
+        {
+          "name": "The Complete Web Developer in 2019: Zero to Mastery",
+          "date": "Април 2019",
+          "link": "https://www.udemy.com/certificate/UC-VWDU25B9/"
+        },
+        {
+          "name": "FreeCodeCamp - JavaScript Algorithms and Data Structures",
+          "date": "Ноември 2018",
+          "link": "https://www.freecodecamp.org/certification/dobromiryor/javascript-algorithms-and-data-structures"
+        },
+        {
+          "name": "FreeCodeCamp - Responsive Web Design",
+          "date": "Октомври 2018",
+          "link": "https://www.freecodecamp.org/certification/dobromiryor/responsive-web-design"
+        },
+        {
+          "name": "Cambridge English: First (FCE) – CEFR level B2",
+          "date": "Юли 2009"
+        }
+      ]
+    }
+  }
+}
