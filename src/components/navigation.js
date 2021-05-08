@@ -49,21 +49,6 @@ const StyledNav = styled.nav`
   pointer-events: ${props => (props.opened ? "none" : "initial")};
   opacity: ${props => (props.opened ? "0" : "1")};
   transition: 0.2s ease-in-out;
-
-  @media only screen and (min-width: 768px) {
-    position: initial;
-    left: initial;
-    top: initial;
-
-    width: initial;
-    height: initial;
-
-    background-color: initial;
-
-    transition: initial;
-    opacity: initial;
-    pointer-events: initial;
-  }
 `
 
 const LinkList = styled.ul`
@@ -78,14 +63,6 @@ const LinkList = styled.ul`
 
   & li {
     margin: 16px;
-  }
-
-  @media only screen and (min-width: 768px) {
-    flex-direction: row;
-
-    & li {
-      margin: 0;
-    }
   }
 `
 
@@ -119,26 +96,7 @@ const StyledLink = styled(AnchorLink)`
     &::before {
       bottom: 6px;
 
-      height: 32px;
-    }
-  }
-
-  @media only screen and (min-width: 768px) {
-    margin: 0 4px;
-    padding: 2px;
-
-    font-size: initial;
-
-    &::before {
-      height: 2px;
-    }
-
-    &:hover {
-      &::before {
-        bottom: 3px;
-
-        height: 16px;
-      }
+      height: 36px;
     }
   }
 `
@@ -160,7 +118,7 @@ const MenuButton = styled.div`
 
   cursor: pointer;
 
-  &:hover ${MenuButtonLine} {
+  &:hover ${MenuButtonLine}, &:active ${MenuButtonLine} {
     background-color: var(--mid-gray);
   }
 
@@ -179,10 +137,6 @@ const MenuButton = styled.div`
       props.shown
         ? "translateY(-10.5px) rotate(-45deg)"
         : "translateY(0) rotate(0deg)"};
-  }
-
-  @media only screen and (min-width: 768px) {
-    display: none;
   }
 `
 
@@ -207,7 +161,8 @@ export default function Navigation() {
     if (
       "IntersectionObserver" in window &&
       "IntersectionObserverEntry" in window &&
-      "intersectionRatio" in window.IntersectionObserverEntry.prototype
+      "intersectionRatio" in window.IntersectionObserverEntry.prototype &&
+      document.querySelector("#welcome") !== null
     ) {
       let observer = new IntersectionObserver(
         entries => {
@@ -221,6 +176,7 @@ export default function Navigation() {
         },
         {
           rootMargin: "-96px 0px",
+          threshold: 0.25,
         }
       )
       observer.observe(document.querySelector("#welcome"))
@@ -236,15 +192,15 @@ export default function Navigation() {
             <LinkList>
               <li>
                 <StyledLink
-                  to="/#about"
-                  title="About"
+                  to="/#projects"
+                  title="Projects"
                   onAnchorLinkClick={handleMenuClose}
                 />
               </li>
               <li>
                 <StyledLink
-                  to="/#projects"
-                  title="Projects"
+                  to="/#about"
+                  title="About"
                   onAnchorLinkClick={handleMenuClose}
                 />
               </li>

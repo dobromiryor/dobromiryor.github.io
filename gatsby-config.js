@@ -6,11 +6,6 @@
 
 module.exports = {
   /* Your site config here */
-  siteMetadata: {
-    title: `Front-end developer`,
-    description: `Hello there! I'm Dobromir Yordanov, a front-end developer based in Plovdiv.`,
-    siteUrl: `https://dobromiryor.github.io/`,
-  },
   plugins: [
     {
       resolve: "gatsby-plugin-anchor-links",
@@ -39,10 +34,35 @@ module.exports = {
         name: `images`,
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Dobromir Yordanov | Front-end Developer`,
+        short_name: `Dobromir Yordanov`,
+        description: `Hello there! I'm Dobromir Yordanov, a front-end developer based in Plovdiv, BG.`,
+        start_url: `.`,
+        display: `standalone`,
+        icon: `static/maskable.png`,
+        icon_options: {
+          purpose: `maskable`,
+        },
+        include_favicon: false,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [`/cv/`, `/404/`],
+        workboxConfig: {
+          globPatterns: ["**/icon-path*"],
+        },
+      },
+    },
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-json`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-react-helmet`,
   ],
 }

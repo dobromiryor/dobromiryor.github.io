@@ -3,14 +3,10 @@ import { useStaticQuery, graphql } from "gatsby"
 import { AnchorLink } from "gatsby-plugin-anchor-links"
 import styled, { createGlobalStyle } from "styled-components"
 
+import "../styles/global.css"
+
 const GlobalStyle = createGlobalStyle`
   body{
-    margin: 0;
-
-    background-color: var(--background);
-    color: var(--text);
-
-    font-family: sans-serif;
 
     a {
       color: var(--text);
@@ -23,24 +19,9 @@ const GlobalStyle = createGlobalStyle`
       padding: 0;
     }
 
-    h1, h2, h3, h4, h5, p, a, span {
+    h1, h2, h3, h4, h5, p, a, span, li {
       margin: 0;
-    }
-
-    h1{
-      font-size: 3rem;
-    }
-    h2{
-      font-size: 1.2rem;
-    }
-    h3{
-      font-size: 1.1rem;
-    }
-    h4{
-      font-size: 1rem;
-    }
-    h5{
-      font-size: 0.75rem;
+      line-height: 1em;
     }
   }
 
@@ -53,11 +34,26 @@ const GlobalStyle = createGlobalStyle`
     width: 210mm;
     height: 297mm;
     padding: 10mm;
-    margin: 0 auto;
+    margin: 32px auto;
+
+    box-shadow: var(--big-shadow);
+
+    @media print{
+      margin: 0;
+      box-shadow: none;
+    }
+  }
+
+  .name{
+    font-size: 2rem;
   }
 
   .uppercase {
     text-transform: uppercase;
+  }
+
+  .bold {
+    font-weight: bold;
   }
 
   .row{
@@ -104,24 +100,6 @@ const GlobalStyle = createGlobalStyle`
     list-style: inside;
   }
 
-  // Light theme
-  @media (prefers-color-scheme: light) {
-    :root {
-      --text: #333;
-      --mid-gray: #ccc;
-      --background: #fff;
-    }
-  }
-
-  // Dark theme
-  @media (prefers-color-scheme: dark) {
-    :root{
-      --text: #ccc;
-      --mid-gray: #666;
-      --background: #222;
-    }
-  }
-
   // Print
   @media print {
     body{
@@ -139,19 +117,6 @@ const GlobalStyle = createGlobalStyle`
       size: A4 portrait;
     }
   }
-
-  :root{
-    --border-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1),
-		0px 0px 0px 1px rgba(0, 0, 0, 0.15);
-    --small-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.15),
-			0px 2px 4px -2px rgba(0, 0, 0, 0.4);
-      --mid-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.15),
-			0px 4px 8px -4px rgba(0, 0, 0, 0.5);
-  }
-
-  ::selection{
-    background-color: var(--mid-gray);
-  }
 `
 
 const Navigation = styled.nav`
@@ -160,7 +125,6 @@ const Navigation = styled.nav`
   justify-content: space-between;
   width: 210mm;
   margin: 0 auto;
-  padding: 10mm;
 
   button {
     padding: 8px;
@@ -178,8 +142,6 @@ const Navigation = styled.nav`
     }
 
     :hover {
-      /* background-color: var(--mid-gray); */
-      color: var(--text);
       box-shadow: var(--mid-shadow);
 
       a {
@@ -298,71 +260,29 @@ export default function CV() {
     <>
       <GlobalStyle />
       <Navigation>
-        <button>
-          <AnchorLink to="/#">Back</AnchorLink>
-        </button>
+        <AnchorLink to="/">
+          <button>Back</button>
+        </AnchorLink>
         <button onClick={() => window.print()}>Print/Save as PDF</button>
         <div>
-          <button onClick={() => setCv(en)}>
+          <button onClick={() => setCv(en)} title="English">
             <span role="img" aria-label="english">
               🇬🇧
             </span>
           </button>
-          <button onClick={() => setCv(bg)}>
+          <button onClick={() => setCv(bg)} title="Bulgarian">
             <span role="img" aria-label="bulgarian">
               🇧🇬
             </span>
           </button>
         </div>
       </Navigation>
-      <article className="container">
-        <section className="col uppercase">
-          <h1>{cv.firstName}</h1>
-          <h1>{cv.lastName}</h1>
+      <article className="container gap-xl">
+        <section className="col">
+          <h1 className="uppercase name">{cv.firstName}</h1>
+          <h1 className="uppercase name">{cv.lastName}</h1>
         </section>
-        <div className=" row">
-          <div className="col gap-xl mw33">
-            <section className="col gap-m">
-              <div className="col gap-xs">
-                <h4>
-                  {cv.city}, {cv.country}
-                </h4>
-                <h4>
-                  <a
-                    href={`https://${cv.website}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {cv.website}
-                  </a>
-                </h4>
-              </div>
-              <div className="col gap-xs">
-                <h4>
-                  <a href={`mailto:${cv.email}`}>{cv.email}</a>
-                </h4>
-                <h4>
-                  <a href={`tel:${cv.phone}`}>{cv.phone}</a>
-                </h4>
-              </div>
-            </section>
-            <section className="col gap-l">
-              <h2 className="uppercase">{cv.skills.title}</h2>
-              <ul className="col gap-xs">
-                {cv.skills.list.map((item, index) => (
-                  <li key={`skill-${index}`}>{item}</li>
-                ))}
-              </ul>
-            </section>
-            <section className="col gap-l">
-              <h2 className="uppercase">{cv.languages.title}</h2>
-              <ul className="col gap-xs">
-                {cv.languages.list.map((item, index) => (
-                  <li key={`language-${index}`}>{item}</li>
-                ))}
-              </ul>
-            </section>
-          </div>
+        <div className="row gap-m">
           <div className="col gap-xl mw66">
             <section className="col gap-l">
               <h2 className="uppercase">{cv.experience.title}</h2>
@@ -372,7 +292,7 @@ export default function CV() {
                     <h3>{item.position}</h3>
                     <h4>{item.company}</h4>
                     <h5>{item.period}</h5>
-                    <ul className="col gap-xs">
+                    <ul className="col gap-xs" aria-label="task list">
                       {item.tasks.map((item, index) => (
                         <li key={`tasks-${index}`} className="task">
                           {item}
@@ -409,33 +329,50 @@ export default function CV() {
               </ul>
             </section>
           </div>
+          <div className="col gap-xl mw33">
+            <section className="col gap-l">
+              <h2 className="uppercase">{cv.skills.title}</h2>
+              <ul className="col gap-xs">
+                {cv.skills.list.map((item, index) => (
+                  <li key={`skill-${index}`}>{item}</li>
+                ))}
+              </ul>
+            </section>
+            <section className="col gap-l">
+              <h2 className="uppercase">{cv.languages.title}</h2>
+              <ul className="col gap-xs">
+                {cv.languages.list.map((item, index) => (
+                  <li key={`language-${index}`}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          </div>
         </div>
-        <section className="row">
-          <div className="col mw33">
-            <h4>
+        <section className="row gap-m">
+          <div className="col mw33 gap-s">
+            <p className="bold">
               {cv.firstName} {cv.lastName}
-            </h4>
-            <h4>
-              <a
-                href={`https://${cv.website}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {cv.website}
-              </a>
-            </h4>
+            </p>
+            <a
+              className="bold"
+              href={`https://${cv.website}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {cv.website}
+            </a>
           </div>
-          <div className="col mw33">
-            <h4>
-              <a href={`tel:${cv.phone}`}>{cv.phone}</a>
-            </h4>
-            <h4>
-              <a href={`mailto:${cv.email}`}>{cv.email}</a>
-            </h4>
+          <div className="col mw33 gap-s">
+            <a className="bold" href={`tel:${cv.phone}`}>
+              {cv.phone}
+            </a>
+            <a className="bold" href={`mailto:${cv.email}`}>
+              {cv.email}
+            </a>
           </div>
-          <div className="col mw33">
-            <h4>{cv.city}</h4>
-            <h4>{cv.country}</h4>
+          <div className="col mw33 gap-s">
+            <p className="bold">{cv.city}</p>
+            <p className="bold">{cv.country}</p>
           </div>
         </section>
       </article>

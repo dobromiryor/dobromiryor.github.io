@@ -3,6 +3,8 @@ import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
+import "../styles/techStackClasses.css"
+
 import ExternalLinkSVG from "./externalLinkSVG"
 
 const StyledArticle = styled.article`
@@ -14,7 +16,7 @@ const StyledArticle = styled.article`
   border-radius: 8px;
   transition: 0.2s ease-in-out;
 
-  & div {
+  & > div {
     flex-grow: 1;
     flex-basis: 0;
   }
@@ -25,10 +27,46 @@ const StyledArticle = styled.article`
 
   @media only screen and (min-width: 576px) {
     flex-direction: row;
+
+    :nth-child(even) {
+      flex-direction: row-reverse;
+    }
   }
   @media only screen and (min-width: 768px) {
     gap: 32px;
     padding: 32px;
+  }
+`
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+const CreditsList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+  }
+`
+
+const ProjectTitleContainer = styled.div`
+  display: flex;
+  gap: 8px;
+`
+
+const ProjectLink = styled.a`
+  display: flex;
+  justify-content: center;
+  width: 16px;
+  svg {
+    fill: var(--text);
+    width: 100%;
   }
 `
 
@@ -41,6 +79,8 @@ const CreditLink = styled.a`
   font-size: initial;
   font-weight: 700;
   text-decoration: none;
+
+  white-space: nowrap;
 
   &::before {
     position: absolute;
@@ -55,13 +95,14 @@ const CreditLink = styled.a`
 
     transition: 0.2s ease all;
     content: "";
+    white-space: normal;
   }
 
   &:hover {
     &::before {
-      bottom: 3px;
+      bottom: 4px;
 
-      height: 16px;
+      height: 18px;
     }
   }
 `
@@ -77,51 +118,36 @@ const UnorderedList = styled.ul`
   list-style: none;
 
   & li {
-    padding: 8px;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    border-radius: 8px;
-    box-shadow: var(--border-shadow);
-
-    transition: 0.2s ease-in-out;
-
-    &:hover {
-      box-shadow: var(--mid-shadow);
-    }
   }
 `
 
 const ColouredListItem = styled.li`
-  background-color: ${props => `#${props.b}`};
-  color: ${props => `#${props.c}`};
-`
+  padding: 8px;
 
-const LinkListItem = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 14px;
+  font-size: 12px;
+  font-weight: 700;
+
+  border-radius: 8px;
+  box-shadow: var(--border-shadow);
 
   background-color: var(--text);
+  color: var(--background);
 
-  cursor: pointer;
+  transition: 0.2s ease-in-out;
 
-  a {
-    display: flex;
-    text-decoration: none;
-    width: 12px;
-    height: 12px;
+  cursor: default;
 
-    svg {
-      fill: var(--background);
-    }
+  &:hover {
+    box-shadow: var(--mid-shadow);
   }
 `
 
 const StyledGatsbyImage = styled(GatsbyImage)`
-  border-radius: 4px;
+  border-radius: 8px;
+  @media only screen and (min-width: 576px) {
+    max-width: 400px;
+    max-height: 300px;
+  }
 `
 
 export default function Project({ project }) {
@@ -130,7 +156,12 @@ export default function Project({ project }) {
       allFile(filter: { sourceInstanceName: { eq: "images" } }) {
         nodes {
           childImageSharp {
-            gatsbyImageData(placeholder: BLURRED)
+            gatsbyImageData(
+              placeholder: BLURRED
+              quality: 50
+              aspectRatio: 1.33
+              transformOptions: { cropFocus: ATTENTION }
+            )
           }
           name
           publicURL
@@ -147,49 +178,53 @@ export default function Project({ project }) {
   })
 
   return (
-    <StyledArticle>
+    <StyledArticle className="project invisible">
       {project.childrenProjectsJson[0].slug ? (
         <div>
           <StyledGatsbyImage
             image={image}
-            alt=""
-            placeholder="blurred"
-            quality="50"
-            layout="fullWidth"
+            alt="project-image"
             className="project-image"
           />
         </div>
       ) : (
         <></>
       )}
-      <div>
-        <h4>{project.childrenProjectsJson[0].title}</h4>
+      <TextContainer>
+        <ProjectTitleContainer>
+          <h3>{project.childrenProjectsJson[0].title}</h3>
+          <ProjectLink
+            href={project.childrenProjectsJson[0].link}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="external link to app"
+          >
+            <ExternalLinkSVG />
+          </ProjectLink>
+        </ProjectTitleContainer>
         <p>{project.childrenProjectsJson[0].description}</p>
-        {project.childrenProjectsJson[0].credits.map((item, index) => (
-          <p key={index}>
-            {item.text}{" "}
-            <span>
-              <CreditLink href={item.link}>{item.name}</CreditLink>
-            </span>
-          </p>
-        ))}
-        <UnorderedList>
-          <LinkListItem>
-            <a
-              href={project.childrenProjectsJson[0].link}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ExternalLinkSVG />
-            </a>
-          </LinkListItem>
+        {project.childrenProjectsJson[0].credits ? (
+          <CreditsList aria-label="credits and resources">
+            {project.childrenProjectsJson[0].credits.map((item, index) => (
+              <li key={index}>
+                {item.text}{" "}
+                <span>
+                  <CreditLink href={item.link}>{item.name}</CreditLink>
+                </span>
+              </li>
+            ))}
+          </CreditsList>
+        ) : (
+          <></>
+        )}
+        <UnorderedList aria-label="technology stack">
           {project.childrenProjectsJson[0].stack.map((item, index) => (
-            <ColouredListItem key={index} b={item.background} c={item.color}>
+            <ColouredListItem key={index} className={`${item.class}`}>
               {item.name}
             </ColouredListItem>
           ))}
         </UnorderedList>
-      </div>
+      </TextContainer>
     </StyledArticle>
   )
 }

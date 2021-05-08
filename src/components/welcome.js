@@ -4,8 +4,11 @@ import { Link } from "gatsby"
 
 const WelcomeContainer = styled.section`
   box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
 
   display: flex;
+  gap: 16px;
   flex-direction: column;
   justify-content: center;
 
@@ -14,25 +17,46 @@ const WelcomeContainer = styled.section`
   min-height: 480px;
 
   padding: 16px;
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  #name {
+    transition: 1s ease-in-out;
+    letter-spacing: -0.02em;
+    &:hover {
+      letter-spacing: 0em;
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    .title {
+      font-size: 2rem;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+    }
+  }
 `
 
 const WavingHand = styled.span`
   position: absolute;
   animation: 2s ease-in-out infinite alternate wave;
-  transform-origin: bottom left;
+  transform-origin: bottom right;
 
   @keyframes wave {
-    0% {
-      transform: rotate(0deg) translate(4px, -4px);
-    }
-    50% {
-      transform: rotate(0deg) translate(4px, -4px);
+    0%,
+    50%,
+    100% {
+      transform: rotate(0deg) translate(8px, 0);
     }
     75% {
-      transform: rotate(30deg) translate(4px, -20px);
-    }
-    100% {
-      transform: rotate(0deg) translate(4px, -4px);
+      transform: rotate(30deg) translate(8px, -16px);
     }
   }
 `
@@ -79,9 +103,9 @@ const UnorderedList = styled.ul`
 
     &:hover {
       &::before {
-        bottom: 3px;
+        bottom: 4px;
 
-        height: 16px;
+        height: 18px;
       }
     }
   }
@@ -90,18 +114,24 @@ const UnorderedList = styled.ul`
 export default function Welcome() {
   return (
     <WelcomeContainer id="welcome">
-      <h1>
-        Hello there
-        {/* eslint-disable jsx-a11y/accessible-emoji */}
-        <WavingHand role="img" aria-label="waving hand">
-          👋
-        </WavingHand>
+      <h1 className="title">
+        <div>
+          <span>Hello there</span>
+          {/* eslint-disable jsx-a11y/accessible-emoji */}
+          <WavingHand
+            role="img"
+            aria-hidden="true"
+            aria-label="waving hand emoji"
+          >
+            👋
+          </WavingHand>
+        </div>
+        <div>
+          <span>I'm</span> <span id="name">Dobromir Yordanov</span>
+        </div>
       </h1>
-      <h2>
-        My name is <span>Dobromir Yordanov</span>
-      </h2>
-      <h3>I develop and design things for the web.</h3>
-      <UnorderedList>
+      <h2>I develop and design things for the web.</h2>
+      <UnorderedList aria-label="social links">
         <li>
           <Link to="/cv" className="link">
             CV

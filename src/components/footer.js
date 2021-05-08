@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+
+import DefinitelyNotAnEasterEgg from "./definitelyNotAnEasterEgg"
 
 const StyledFooter = styled.footer`
   display: flex;
@@ -17,17 +18,36 @@ const StyledFooter = styled.footer`
 `
 
 const Profile = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  min-width: unset;
+  width: 100%;
   max-width: 960px;
   padding: 16px;
   margin: 0 auto;
 
-  & > div {
+  #profile {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 16px;
+
+    .profile-image {
+      :hover {
+        cursor: grab;
+      }
+      :active {
+        cursor: grabbing;
+      }
+    }
   }
+`
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `
 
 const UnorderedList = styled.ul`
@@ -36,7 +56,7 @@ const UnorderedList = styled.ul`
   gap: 8px;
 
   padding: 0;
-  margin: 16px 0;
+  margin: 0;
 
   list-style: none;
 
@@ -50,7 +70,7 @@ const UnorderedList = styled.ul`
 
     padding: 2px;
 
-    font-size: initial;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
@@ -84,23 +104,11 @@ export default function Footer() {
   return (
     <StyledFooter id="footer">
       <Profile>
-        <div id="profile">
-          <StaticImage
-            src="../images/profile-image.jpg"
-            alt=""
-            placeholder="blurred"
-            quality="50"
-            layout="constrained"
-            style={{
-              width: "calc(15% - 16px)",
-              minWidth: 64,
-              maxWidth: 128,
-              borderRadius: "100%",
-            }}
-          />
-          <div>
-            <h3>Dobromir Yordanov</h3>
-            <UnorderedList>
+        <div id="profile" aria-label="profile">
+          <DefinitelyNotAnEasterEgg />
+          <TextContainer>
+            <h4>Dobromir Yordanov</h4>
+            <UnorderedList aria-label="social links">
               <li>
                 <a href="mailto:dobromir.yor@gmail.com" className="link">
                   Mail
@@ -112,10 +120,10 @@ export default function Footer() {
                 </Link>
               </li>
             </UnorderedList>
-          </div>
+          </TextContainer>
         </div>
         <div>
-          <UnorderedList>
+          <UnorderedList aria-label="social links">
             <li>
               <a
                 href="https://www.linkedin.com/in/dobromiryor/"
