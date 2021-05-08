@@ -1,6 +1,9 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import Helmet from "react-helmet"
+
+import "../styles/global.css"
 
 import Navigation from "../components/navigation"
 
@@ -132,6 +135,14 @@ const StyledLink = styled(Link)`
 export default function NotFound() {
   return (
     <div>
+      <Helmet
+        htmlAttributes={{
+          lang: "en",
+        }}
+      >
+        <title>Page not found | Dobromir Yordanov | Front-end Developer</title>
+        <meta name="robots" content="follow, noarchive, noindex" />
+      </Helmet>
       <Navigation />
       <Container>
         <Graphic aria-label="404">

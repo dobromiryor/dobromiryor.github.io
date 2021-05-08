@@ -52,9 +52,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-offline`,
       options: {
-        precachePages: [`/cv/`, `/404/`],
+        precachePages: [`/cv`, `/404`],
         workboxConfig: {
-          globPatterns: ["**/icon-path*"],
+          globPatterns: ["**/static*"],
         },
       },
     },

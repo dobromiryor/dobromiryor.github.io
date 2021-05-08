@@ -188,7 +188,10 @@ export default function Navigation() {
       <Container>
         <Logo handleMenuClose={handleMenuClose} />
         <>
-          <StyledNav opened={menuOpened ? false : true}>
+          <StyledNav
+            opened={menuOpened ? false : true}
+            aria-expanded={menuOpened}
+          >
             <LinkList>
               <li>
                 <StyledLink

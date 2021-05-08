@@ -31,6 +31,7 @@ const StyledFloatingButton = styled.div`
 
 export default function FloatingButton({ Icon }) {
   const [target, setTarget] = useState("/#projects")
+  const [label, setLabel] = useState("Scroll down to projects")
 
   useEffect(() => {
     if (
@@ -44,9 +45,11 @@ export default function FloatingButton({ Icon }) {
             if (entries[0].isIntersecting) {
               document.querySelector("#chevron").classList.remove("up")
               setTarget("/#projects")
+              setLabel("Scroll down to projects")
             } else {
               document.querySelector("#chevron").classList.add("up")
               setTarget("/#welcome")
+              setLabel("Scroll to top")
             }
           }
         },
@@ -60,7 +63,7 @@ export default function FloatingButton({ Icon }) {
   }, [])
   return (
     <AnchorLink to={target}>
-      <StyledFloatingButton>
+      <StyledFloatingButton aria-label={label}>
         <Icon />
       </StyledFloatingButton>
     </AnchorLink>

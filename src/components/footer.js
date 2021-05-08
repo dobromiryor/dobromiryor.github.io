@@ -44,6 +44,12 @@ const Profile = styled.div`
   }
 `
 
+const Name = styled.div`
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+`
+
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -107,7 +113,7 @@ export default function Footer() {
         <div id="profile" aria-label="profile">
           <DefinitelyNotAnEasterEgg />
           <TextContainer>
-            <h4>Dobromir Yordanov</h4>
+            <Name>Dobromir Yordanov</Name>
             <UnorderedList aria-label="social links">
               <li>
                 <a href="mailto:dobromir.yor@gmail.com" className="link">

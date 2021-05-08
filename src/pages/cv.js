@@ -1,9 +1,12 @@
 import React, { useState } from "react"
+import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { AnchorLink } from "gatsby-plugin-anchor-links"
 import styled, { createGlobalStyle } from "styled-components"
 
 import "../styles/global.css"
+
+import bannerImage from "../../static/banner.png"
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -258,6 +261,44 @@ export default function CV() {
 
   return (
     <>
+      <Helmet
+        htmlAttributes={{
+          lang: "en",
+        }}
+      >
+        <title>CV | Dobromir Yordanov | Front-end Developer</title>
+        <meta
+          name="description"
+          content="Hello there! I'm Dobromir Yordanov, a front-end developer based in Plovdiv, BG."
+        />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="Dobromir Yordanov | Front-end Developer"
+        />
+        <meta
+          property="og:site_name"
+          content="Dobromir Yordanov | Front-end Developer"
+        />
+        <meta
+          property="og:description"
+          content="Hello there! I'm Dobromir Yordanov, a front-end developer based in Plovdiv, BG."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://dobromiryor.github.io/" />
+        <meta property="og:image" content={bannerImage} />
+        <meta property="twitter:card" content="summary" />
+        <meta
+          property="twitter:title"
+          content="Dobromir Yordanov | Front-end Developer"
+        />
+        <meta
+          property="twitter:description"
+          content="Hello there! I'm Dobromir Yordanov, a front-end developer based in Plovdiv, BG."
+        />
+        <meta property="twitter:image" content={bannerImage} />
+        <meta property="twitter:creator" content="@dobromiryor" />
+      </Helmet>
       <GlobalStyle />
       <Navigation>
         <AnchorLink to="/">

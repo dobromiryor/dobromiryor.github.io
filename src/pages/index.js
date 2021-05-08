@@ -86,14 +86,13 @@ export default function Home() {
   return (
     <>
       <GlobalStyle />
-      <Helmet>
+      <Helmet
+        htmlAttributes={{
+          lang: "en",
+        }}
+      >
         <link rel="icon" type="image/svg+xml" href={faviconSVG} />
         <link rel="alternative icon" href={favicon} />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&family=Poppins:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
         <meta
           name="description"
           content="Hello there! I'm Dobromir Yordanov, a front-end developer based in Plovdiv, BG."
