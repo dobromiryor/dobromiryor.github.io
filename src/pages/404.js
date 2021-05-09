@@ -14,7 +14,8 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
 
-  /* margin-top: 72px; */
+  gap: 32px;
+
   padding: 0 16px;
 `
 
@@ -27,11 +28,16 @@ const Graphic = styled.div`
   font-weight: 800;
   transition: 0.2s ease-in-out;
   letter-spacing: -32px;
+  line-height: 1;
   transform: translateX(-16px);
   cursor: default;
 
   &:hover {
     letter-spacing: -24px;
+
+    & > span {
+      text-shadow: var(--big-shadow);
+    }
   }
 
   span:nth-child(1) {
@@ -93,6 +99,9 @@ const Graphic = styled.div`
 `
 
 const TextBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   text-align: center;
 `
 
@@ -145,12 +154,12 @@ export default function NotFound() {
       </Helmet>
       <Navigation />
       <Container>
-        <Graphic aria-label="404">
-          <span>4</span>
-          <span role="img" aria-label="thinking face">
+        <Graphic aria-label="404 graphic">
+          <span aria-hidden="true">4</span>
+          <span aria-hidden="true" role="img" aria-label="thinking face">
             🤔
           </span>
-          <span>4</span>
+          <span aria-hidden="true">4</span>
         </Graphic>
         <TextBlock>
           <h1>There's nothing here.</h1>

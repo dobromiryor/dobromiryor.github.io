@@ -93,17 +93,17 @@ export default function About() {
         both interests.
       </p>
       <p>
-        Outside of development, I'm interested in gaming,
+        <span>Outside of development, I'm interested in gaming, </span>
         <StyledLinkSpan>
           <a
             href="https://trakt.tv/users/dobromir-yor"
             target="_blank"
             rel="noreferrer"
           >
-            films and TV shows{" "}
+            films and TV shows
           </a>
         </StyledLinkSpan>
-        , different genres of
+        <span>, different genres of </span>
         <StyledLinkSpan>
           <a
             href="https://www.last.fm/user/dobromiryor"
@@ -113,7 +113,7 @@ export default function About() {
             music
           </a>
         </StyledLinkSpan>
-        ,
+        <span>, </span>
         <StyledLinkSpan>
           <a
             href="https://www.instagram.com/dobromir.yor/"
@@ -123,7 +123,7 @@ export default function About() {
             photography
           </a>
         </StyledLinkSpan>
-        and cooking (let's be honest —{" "}
+        <span> and cooking (let's be honest — </span>
         <StyledLinkSpan id="gif-container" onMouseMove={handleMouseMove}>
           mostly eating
           <Gif id="gif" src={homer} onMouseMove={e => e.stopPropagation()} />
@@ -133,7 +133,7 @@ export default function About() {
       <p>
         I am currently looking for a workplace to apply and improve my skill
         set. I'm also open to hearing about project opportunities so feel free
-        to
+        to{" "}
         <StyledLinkSpan>
           <a
             href="mailto:dobromiryor@gmail.com"

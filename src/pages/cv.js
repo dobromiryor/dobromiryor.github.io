@@ -9,8 +9,9 @@ import "../styles/global.css"
 import bannerImage from "../../static/banner.png"
 
 const GlobalStyle = createGlobalStyle`
-  body{
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
 
+  body{
     a {
       color: var(--text);
       text-decoration: none;
@@ -25,6 +26,14 @@ const GlobalStyle = createGlobalStyle`
     h1, h2, h3, h4, h5, p, a, span, li {
       margin: 0;
       line-height: 1em;
+    }
+
+    h1,h2,h3,h4,h5{
+      font-family: ${props =>
+        props.bul ? "'Raleway', sans-serif;" : "'Poppins', sans-serif"};
+    }
+    h1,h2,h3{
+      font-weight: ${props => (props.bul ? "800" : "700")};
     }
   }
 
@@ -258,6 +267,7 @@ export default function CV() {
   let en = data.allFile.nodes[0].childrenCvJson[0].en
 
   const [cv, setCv] = useState(en)
+  const [bul, setBul] = useState(false)
 
   return (
     <>
@@ -299,19 +309,31 @@ export default function CV() {
         <meta property="twitter:image" content={bannerImage} />
         <meta property="twitter:creator" content="@dobromiryor" />
       </Helmet>
-      <GlobalStyle />
+      <GlobalStyle bul={bul} />
       <Navigation>
         <AnchorLink to="/">
-          <button>Back</button>
+          <button tabIndex="-1">Back</button>
         </AnchorLink>
         <button onClick={() => window.print()}>Print/Save as PDF</button>
-        <div>
-          <button onClick={() => setCv(en)} title="English">
+        <div aria-label="language buttons">
+          <button
+            onClick={() => {
+              setCv(en)
+              setBul(false)
+            }}
+            title="English"
+          >
             <span role="img" aria-label="english">
               🇬🇧
             </span>
           </button>
-          <button onClick={() => setCv(bg)} title="Bulgarian">
+          <button
+            onClick={() => {
+              setCv(bg)
+              setBul(true)
+            }}
+            title="Bulgarian"
+          >
             <span role="img" aria-label="bulgarian">
               🇧🇬
             </span>
@@ -361,9 +383,9 @@ export default function CV() {
               <ul className="col gap-m">
                 {cv.certifications.list.map((item, index) => (
                   <li key={`certification-${index}`} className="col gap-s">
-                    <h3>
+                    <h4>
                       <a href={item.link}>{item.name}</a>
-                    </h3>
+                    </h4>
                     <h5>{item.date}</h5>
                   </li>
                 ))}

@@ -11,6 +11,7 @@ const StyledFooter = styled.footer`
   box-shadow: var(--mid-shadow);
   transition: 0.2s ease-in-out;
   width: 100%;
+  margin: 16px 0 0 0;
 
   &:hover {
     box-shadow: var(--big-shadow);

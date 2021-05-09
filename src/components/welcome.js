@@ -27,7 +27,7 @@ const WelcomeContainer = styled.section`
   }
 
   #name {
-    transition: 1s ease-in-out;
+    transition: 1s letter-spacing ease-in-out;
     letter-spacing: -0.02em;
     &:hover {
       letter-spacing: 0em;

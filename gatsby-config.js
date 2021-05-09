@@ -42,11 +42,13 @@ module.exports = {
         description: `Hello there! I'm Dobromir Yordanov, a front-end developer based in Plovdiv, BG.`,
         start_url: `.`,
         display: `standalone`,
-        icon: `static/maskable.png`,
+        icon: `static/icon.png`,
         icon_options: {
-          purpose: `maskable`,
+          purpose: `any`,
         },
         include_favicon: false,
+        background_color: `#222222`,
+        theme_color: `#222222`,
       },
     },
     {

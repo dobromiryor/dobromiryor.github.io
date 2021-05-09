@@ -124,14 +124,16 @@ export default function Home() {
         />
         <meta property="twitter:image" content={bannerImage} />
         <meta property="twitter:creator" content="@dobromiryor" />
+        <meta name="theme-color" content="#222222" />
+        <meta name="color-scheme" content="light dark" />
         <title>Dobromir Yordanov | Front-end Developer</title>
       </Helmet>
       <Navigation />
       <Container>
         <Welcome />
+        <FloatingButton Icon={chevronSVG} />
         <Projects />
         <About />
-        <FloatingButton Icon={chevronSVG} />
       </Container>
       <Footer />
     </>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { AnchorLink } from "gatsby-plugin-anchor-links"
 
-const StyledFloatingButton = styled.div`
+const StyledLink = styled(AnchorLink)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +16,7 @@ const StyledFloatingButton = styled.div`
   box-shadow: var(--border-shadow);
   background-color: var(--background);
   color: var(--text);
+  text-decoration: none;
   z-index: 5;
   transition: 0.2s ease-in-out;
 
@@ -62,10 +63,14 @@ export default function FloatingButton({ Icon }) {
     }
   }, [])
   return (
-    <AnchorLink to={target}>
-      <StyledFloatingButton aria-label={label}>
-        <Icon />
-      </StyledFloatingButton>
-    </AnchorLink>
+    <StyledLink
+      to={target}
+      title={label}
+      gatsbyLinkProps={{
+        tabIndex: "0",
+      }}
+    >
+      <Icon />
+    </StyledLink>
   )
 }

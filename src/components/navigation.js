@@ -36,34 +36,22 @@ const Container = styled.div`
 
 const StyledNav = styled.nav`
   position: absolute;
-  left: 0;
   top: 72px;
+  right: ${props => (props["aria-expanded"] ? "0" : "-100vw")};
 
-  display: flex;
-  justify-content: center;
-  height: ${props => (props.opened ? "0" : "calc(100vh - 72px)")};
-  width: 100%;
-
-  background-color: var(--background);
-
-  pointer-events: ${props => (props.opened ? "none" : "initial")};
-  opacity: ${props => (props.opened ? "0" : "1")};
-  transition: 0.2s ease-in-out;
-`
-
-const LinkList = styled.ul`
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  height: calc(100vh - 72px);
+  width: 100%;
 
-  list-style: none;
+  background-color: var(--background);
 
-  & li {
-    margin: 16px;
-  }
+  pointer-events: ${props => (props["aria-expanded"] ? "initial" : "none")};
+  opacity: ${props => (props["aria-expanded"] ? "1" : "0")};
+
+  transition: 0.2s ease-in-out;
 `
 
 const StyledLink = styled(AnchorLink)`
@@ -102,7 +90,7 @@ const StyledLink = styled(AnchorLink)`
 `
 
 const MenuButtonLine = styled.div`
-  width: 36px;
+  width: 40px;
   height: 2px;
 
   background-color: var(--text);
@@ -110,7 +98,13 @@ const MenuButtonLine = styled.div`
   transition: 0.2s ease-in-out all;
 `
 
-const MenuButton = styled.div`
+const MenuButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  height: 40px;
+  width: 40px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -124,18 +118,18 @@ const MenuButton = styled.div`
 
   ${MenuButtonLine}:nth-child(1) {
     transform: ${props =>
-      props.shown
-        ? "translateY(10.5px) rotate(45deg)"
+      props.open
+        ? "translateY(10px) rotate(45deg)"
         : "translateY(0) rotate(0deg)"};
   }
   ${MenuButtonLine}:nth-child(2) {
-    opacity: ${props => (props.shown ? 0 : 1)};
-    transform: ${props => (props.shown ? "rotate(45deg)" : "rotate(0deg)")};
+    opacity: ${props => (props.open ? 0 : 1)};
+    transform: ${props => (props.open ? "rotate(45deg)" : "rotate(0deg)")};
   }
   ${MenuButtonLine}:nth-child(3) {
     transform: ${props =>
-      props.shown
-        ? "translateY(-10.5px) rotate(-45deg)"
+      props.open
+        ? "translateY(-10px) rotate(-45deg)"
         : "translateY(0) rotate(0deg)"};
   }
 `
@@ -187,45 +181,41 @@ export default function Navigation() {
     <StyledHeader id="navigation">
       <Container>
         <Logo handleMenuClose={handleMenuClose} />
-        <>
-          <StyledNav
-            opened={menuOpened ? false : true}
-            aria-expanded={menuOpened}
-          >
-            <LinkList>
-              <li>
-                <StyledLink
-                  to="/#projects"
-                  title="Projects"
-                  onAnchorLinkClick={handleMenuClose}
-                />
-              </li>
-              <li>
-                <StyledLink
-                  to="/#about"
-                  title="About"
-                  onAnchorLinkClick={handleMenuClose}
-                />
-              </li>
-              <li>
-                <StyledLink
-                  to="/cv/"
-                  title="CV"
-                  onAnchorLinkClick={handleMenuClose}
-                />
-              </li>
-            </LinkList>
-          </StyledNav>
-          <MenuButton
-            title="Menu"
-            onClick={handleMenuButton}
-            shown={menuOpened ? true : false}
-          >
-            <MenuButtonLine />
-            <MenuButtonLine />
-            <MenuButtonLine />
-          </MenuButton>
-        </>
+        <MenuButton
+          title="Menu"
+          onClick={handleMenuButton}
+          open={!menuOpened ? false : true}
+        >
+          <MenuButtonLine />
+          <MenuButtonLine />
+          <MenuButtonLine />
+        </MenuButton>
+        <StyledNav aria-expanded={menuOpened} aria-hidden={!menuOpened}>
+          <StyledLink
+            to="/#projects"
+            title="Projects"
+            onAnchorLinkClick={handleMenuClose}
+            gatsbyLinkProps={{
+              tabIndex: menuOpened ? "0" : "-1",
+            }}
+          />
+          <StyledLink
+            to="/#about"
+            title="About"
+            onAnchorLinkClick={handleMenuClose}
+            gatsbyLinkProps={{
+              tabIndex: menuOpened ? "0" : "-1",
+            }}
+          />
+          <StyledLink
+            to="/cv/"
+            title="CV"
+            onAnchorLinkClick={handleMenuClose}
+            gatsbyLinkProps={{
+              tabIndex: menuOpened ? "0" : "-1",
+            }}
+          />
+        </StyledNav>
       </Container>
     </StyledHeader>
   )
