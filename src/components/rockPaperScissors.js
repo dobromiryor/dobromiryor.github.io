@@ -102,14 +102,10 @@ export default function RockPaperScissors({
   useEffect(() => {
     if (userScore === 3) {
       setMessage("You won!")
-      setComputerScore(0)
-      setUserScore(0)
       setGameRunning(false)
       setGameFinished(true)
     } else if (computerScore === 3) {
       setMessage("You lost!")
-      setComputerScore(0)
-      setUserScore(0)
       setGameRunning(false)
       setGameFinished(true)
     }
