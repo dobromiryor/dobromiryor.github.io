@@ -209,7 +209,9 @@ export default function Project({ project }) {
               <li key={index}>
                 {item.text}{" "}
                 <span>
-                  <CreditLink href={item.link}>{item.name}</CreditLink>
+                  <CreditLink href={item.link} target="_blank" rel="noreferrer">
+                    {item.name}
+                  </CreditLink>
                 </span>
               </li>
             ))}

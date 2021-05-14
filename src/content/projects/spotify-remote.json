@@ -1,0 +1,21 @@
+{
+  "title": "Spotify Remote",
+  "description": "A React PWA that can control your Spotify playback. The app uses a Node.js server for authentication and authorization. Playback icons were made by me.",
+  "credits": [
+    {
+      "text": "Data retrieved using ",
+      "name": "Spotify API",
+      "link": "https://developer.spotify.com/"
+    }
+  ],
+  "link": "https://spotify-remote-dy.herokuapp.com/",
+  "stack": [
+    { "name": "HTML", "class": "html" },
+    { "name": "CSS", "class": "css" },
+    { "name": "JavaScript", "class": "js" },
+    { "name": "React", "class": "react" },
+    { "name": "Node.js", "class": "nodejs" },
+    { "name": "PWA", "class": "pwa" }
+  ],
+  "slug": "spotify-remote"
+}

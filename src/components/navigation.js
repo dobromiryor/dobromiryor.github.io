@@ -24,6 +24,10 @@ const StyledHeader = styled.header`
   &.shadow {
     box-shadow: var(--big-shadow);
   }
+
+  @media print {
+    display: none;
+  }
 `
 
 const Container = styled.div`
@@ -208,7 +212,7 @@ export default function Navigation() {
             }}
           />
           <StyledLink
-            to="/cv/"
+            to="/cv"
             title="CV"
             onAnchorLinkClick={handleMenuClose}
             gatsbyLinkProps={{

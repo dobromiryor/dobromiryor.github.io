@@ -1,16 +1,15 @@
 import React, { useState } from "react"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-import { AnchorLink } from "gatsby-plugin-anchor-links"
 import styled, { createGlobalStyle } from "styled-components"
 
 import "../styles/global.css"
 
 import bannerImage from "../../static/banner.png"
 
-const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
+import Navigation from "../components/navigation"
 
+const GlobalStyle = createGlobalStyle`
   body{
     a {
       color: var(--text);
@@ -49,6 +48,15 @@ const GlobalStyle = createGlobalStyle`
     margin: 32px auto;
 
     box-shadow: var(--big-shadow);
+
+    @media screen and (max-width: 922px){
+      height: initial;
+      width: initial;
+      padding: 16px;
+      margin: 0;
+
+      box-shadow: none;
+    }
 
     @media print{
       margin: 0;
@@ -100,16 +108,30 @@ const GlobalStyle = createGlobalStyle`
 
   .mw33{
     width: 100%;
-    max-width: 33.33%
+    max-width: 33.33%;
   }
 
   .mw66{
     width: 100%;
-    max-width: 66.66%
+    max-width: 66.66%;
   }
 
   .task{
     list-style: inside;
+  }
+
+  @media screen and (max-width: 922px){
+    .mw66, .mw33{
+      max-width: initial;
+    }
+
+    .to-col{
+      flex-direction: column;
+    }
+
+    .print-only {
+      display: none;
+    }
   }
 
   // Print
@@ -117,6 +139,14 @@ const GlobalStyle = createGlobalStyle`
     body{
       background-color: var(--background-color);
       color: var(--text);
+    }
+
+    .to-col{
+      flex-direction: row;
+    }
+
+    .print-only {
+      display: flex;
     }
 
     :root{
@@ -131,12 +161,12 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Navigation = styled.nav`
+const Options = styled.nav`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   width: 210mm;
-  margin: 0 auto;
+  margin: 88px auto 16px auto;
 
   button {
     padding: 8px;
@@ -160,6 +190,11 @@ const Navigation = styled.nav`
         color: var(--text);
       }
     }
+  }
+
+  @media screen and (max-width: 922px) {
+    width: 100%;
+    padding: 0 16px;
   }
 
   @media print {
@@ -276,6 +311,11 @@ export default function CV() {
           lang: "en",
         }}
       >
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap"
+          rel="stylesheet"
+        />
         <title>CV | Dobromir Yordanov | Front-end Developer</title>
         <meta
           name="description"
@@ -310,10 +350,8 @@ export default function CV() {
         <meta property="twitter:creator" content="@dobromiryor" />
       </Helmet>
       <GlobalStyle bul={bul} />
-      <Navigation>
-        <AnchorLink to="/">
-          <button tabIndex="-1">Back</button>
-        </AnchorLink>
+      <Navigation />
+      <Options>
         <button onClick={() => window.print()}>Print/Save as PDF</button>
         <div aria-label="language buttons">
           <button
@@ -339,13 +377,13 @@ export default function CV() {
             </span>
           </button>
         </div>
-      </Navigation>
+      </Options>
       <article className="container gap-xl">
         <section className="col">
           <h1 className="uppercase name">{cv.firstName}</h1>
           <h1 className="uppercase name">{cv.lastName}</h1>
         </section>
-        <div className="row gap-m">
+        <div className="row to-col gap-xl">
           <div className="col gap-xl mw66">
             <section className="col gap-l">
               <h2 className="uppercase">{cv.experience.title}</h2>
@@ -411,7 +449,7 @@ export default function CV() {
             </section>
           </div>
         </div>
-        <section className="row gap-m">
+        <section className="row gap-m print-only">
           <div className="col mw33 gap-s">
             <p className="bold">
               {cv.firstName} {cv.lastName}
