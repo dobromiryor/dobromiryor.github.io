@@ -4,14 +4,19 @@ import { StaticImage } from "gatsby-plugin-image"
 
 import RockPaperScissors from "./rockPaperScissors"
 
-const consoleMessage = `
-╭━━━━━━━━━━━━━━━━━━━━━━━╮
-│ Do                    │
-│    not                │
-│        touch          │
-│              my       │
-│                 photo │
-╰━━━━━━━━━━━━━━━━━━━━━━━╯
+const consoleMessage = `%c
+  ┏━━━━━━━━━━━━━━━━━━━━━━━┓
+  ┃ Do                    ┃
+  ┃    not                ┃
+  ┃        touch          ┃
+  ┃              my       ┃
+  ┃                 photo ┃
+  ┗━━━━━━━━━━━━━━━━━━━━━━━┛
+`
+
+const consoleStyle = `
+  color: #ccc;
+  text-shadow: 0px 0px 8px black;
 `
 
 const dialogue = [
@@ -26,25 +31,29 @@ const Container = styled.div`
   position: relative;
 `
 
-const MessageContainer = styled.div`
+const MessageContainer = styled.span`
+  display: inline-block;
   position: absolute;
   left: calc(100% + 16px);
   top: calc(50% + 8px);
   padding: 8px;
-  width: 142px;
+  width: max-content;
+  min-width: 64px;
+  max-width: 208px;
+  max-height: 48px;
 
-  line-height: 16px;
+  line-height: 20px;
 
   background-color: var(--background);
   border-radius: 0 8px 8px 8px;
   z-index: 5;
-  transition: 0.2s ease-in-out;
+  transition: transform 0.2s, opacity 0.2s;
   box-shadow: var(--mid-shadow);
 
-  transform: translateX(-16px);
-  opacity: 0;
-
-  pointer-events: none;
+  transform: ${({ showMessage }) =>
+    showMessage ? "translateX(0)" : "translateX(-16px)"};
+  opacity: ${({ showMessage }) => (showMessage ? "1" : "0")};
+  pointer-events: ${({ showMessage }) => (showMessage ? "default" : "none")};
 
   ::before {
     content: "";
@@ -61,33 +70,38 @@ const MessageContainer = styled.div`
   :hover {
     box-shadow: var(--mid-shadow);
   }
-
-  &.float-right {
-    opacity: 1;
-    transform: translateX(0);
-  }
 `
 
-export default function DefinitelyNotAnEasterEgg() {
+let timeout
+
+export default function DefinitelyNotAnEasterEgg({
+  running: gameRunning,
+  setRunning: setGameRunning,
+  finished: gameFinished,
+  setFinished: setGameFinished,
+}) {
   const [message, setMessage] = useState("")
   const [counter, setCounter] = useState(0)
-  const [gameRunning, setGameRunning] = useState(false)
-  const [gameFinished, setGameFinished] = useState(false)
-
-  let messageTimer
+  const [showMessage, setShowMessage] = useState(false)
 
   const talk = () => {
-    clearTimeout(messageTimer)
     if (!gameFinished) {
-      document.querySelector("#message").classList.add("float-right")
-      messageTimer = setTimeout(() => {
-        document.querySelector("#message").classList.remove("float-right")
+      setShowMessage(true)
+      timeout = setTimeout(() => {
+        setShowMessage(false)
       }, 2000)
       if (!gameRunning) {
         setMessage(dialogue[counter])
         setCounter(counter + 1)
+      } else {
+        setShowMessage(false)
       }
     }
+  }
+
+  const hideMessage = () => {
+    setShowMessage(false)
+    clearTimeout(timeout)
   }
 
   useEffect(() => {
@@ -95,22 +109,15 @@ export default function DefinitelyNotAnEasterEgg() {
       setGameRunning(true)
       setCounter(0)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter, gameRunning])
 
   useEffect(() => {
-    if (gameFinished) {
-      setTimeout(() => {
-        document.querySelector("#message").classList.add("hidden")
-      }, 500)
-    }
-  }, [gameFinished])
-
-  useEffect(() => {
-    console.log(consoleMessage)
+    console.log(consoleMessage, consoleStyle)
   }, [])
 
   return (
-    <Container onClick={talk}>
+    <Container onClick={showMessage ? hideMessage : talk}>
       <StaticImage
         src="../images/profile-image.jpg"
         alt="profile image"
@@ -130,7 +137,11 @@ export default function DefinitelyNotAnEasterEgg() {
         gameFinished={gameFinished}
         setGameFinished={setGameFinished}
       />
-      <MessageContainer id="message" onClick={e => e.stopPropagation()}>
+      <MessageContainer
+        id="message"
+        onClick={e => e.stopPropagation()}
+        showMessage={showMessage}
+      >
         {message}
       </MessageContainer>
     </Container>

@@ -14,6 +14,7 @@
         "CSS",
         "SCSS/SASS",
         "JavaScript",
+        "TypeScript",
         "jQuery",
         "React",
         "Gatsby",
@@ -21,6 +22,7 @@
         "Bootstrap",
         "Git",
         "Responsive Design",
+        "Figma",
         "Adobe Photoshop",
         "Adobe Illustrator"
       ]
@@ -32,6 +34,15 @@
     "experience": {
       "title": "Relevant Experience",
       "list": [
+        {
+          "company": "SentecaCommerce",
+          "position": "Front End Developer",
+          "period": "June 2021 - Present",
+          "tasks": [
+            "Developing fast ecommerce websites using React on top of SentecaCommerce's proprietary platform.",
+            "Transforming Figma designs into functioning pages using styled-components and tailwindcss."
+          ]
+        },
         {
           "company": "m+w MediaNetworks",
           "position": "Front End Developer",
@@ -62,11 +73,6 @@
           "name": "Complete React Developer in 2020",
           "date": "October 2020",
           "link": "https://www.udemy.com/certificate/UC-a50c93b2-a0c1-46e7-a986-ef711df5d38c/"
-        },
-        {
-          "name": "FreeCodeCamp: D3 Data Visualization",
-          "date": "August 2020",
-          "link": "https://www.freecodecamp.org/certification/dobromiryor/data-visualization"
         },
         {
           "name": "JavaScript: The Advanced Concepts",
@@ -115,6 +121,7 @@
         "CSS",
         "SCSS/SASS",
         "JavaScript",
+        "TypeScript",
         "jQuery",
         "React",
         "Gatsby",
@@ -122,6 +129,7 @@
         "Bootstrap",
         "Git",
         "Responsive Design",
+        "Figma",
         "Adobe Photoshop",
         "Adobe Illustrator"
       ]
@@ -133,6 +141,15 @@
     "experience": {
       "title": "Приложим опит",
       "list": [
+        {
+          "company": "SentecaCommerce",
+          "position": "Front End Developer",
+          "period": "Юни 2021 - Настояще",
+          "tasks": [
+            "Разработване на бързи ecommerce уебсайтове използвайки React, върху платформата на SentecaCommerce.",
+            "Превръщане на Figma дизайни във функционални страници, използвайки styled-components и tailwindcss."
+          ]
+        },
         {
           "company": "m+w MediaNetworks",
           "position": "Front End Developer",
@@ -163,11 +180,6 @@
           "name": "Complete React Developer in 2020",
           "date": "Октомври 2020",
           "link": "https://www.udemy.com/certificate/UC-a50c93b2-a0c1-46e7-a986-ef711df5d38c/"
-        },
-        {
-          "name": "FreeCodeCamp: D3 Data Visualization",
-          "date": "Август 2020",
-          "link": "https://www.freecodecamp.org/certification/dobromiryor/data-visualization"
         },
         {
           "name": "JavaScript: The Advanced Concepts",

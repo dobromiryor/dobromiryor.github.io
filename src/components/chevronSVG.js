@@ -4,7 +4,7 @@ import { createGlobalStyle } from "styled-components"
 const GlobalStyle = createGlobalStyle`
   svg{
     transform: translateY(0) rotate(0deg);
-    transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
 
   .up{

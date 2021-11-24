@@ -31,13 +31,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .invisible {
-    transition: 0.5s ease-in-out;
+    transition: 0.2s ease-in-out;
     transform: translateY(16px);
     opacity: 0;
   }
 
   .float-in {
-    transition: 0.5s ease-in-out;
+    transition: 0.2s ease-in-out;
     transform: translateY(0px);
     opacity: 1;
   }

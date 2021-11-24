@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
@@ -33,20 +33,26 @@ const Profile = styled.div`
     display: flex;
     align-items: center;
     gap: 16px;
+    border-radius: 100%;
 
     .profile-image {
+      border-radius: 100%;
+
       :hover {
-        cursor: grab;
+        cursor: ${({ running, finished }) =>
+          running || finished ? "default" : "grab"};
       }
+
       :active {
-        cursor: grabbing;
+        cursor: ${({ running, finished }) =>
+          running || finished ? "default" : "grabbing"};
       }
     }
   }
 `
 
 const Name = styled.div`
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", "Raleway", sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
 `
@@ -108,11 +114,19 @@ const UnorderedList = styled.ul`
 `
 
 export default function Footer() {
+  const [running, setRunning] = useState(false)
+  const [finished, setFinished] = useState(false)
+
   return (
     <StyledFooter id="footer">
-      <Profile>
+      <Profile running={running} finished={finished}>
         <div id="profile" aria-label="profile">
-          <DefinitelyNotAnEasterEgg />
+          <DefinitelyNotAnEasterEgg
+            running={running}
+            setRunning={setRunning}
+            finished={finished}
+            setFinished={setFinished}
+          />
           <TextContainer>
             <Name>Dobromir Yordanov</Name>
             <UnorderedList aria-label="social links">

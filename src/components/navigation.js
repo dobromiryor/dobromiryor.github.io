@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { AnchorLink } from "gatsby-plugin-anchor-links"
+import { Link } from "gatsby"
 
 import Logo from "./logo"
 
@@ -58,7 +59,7 @@ const StyledNav = styled.nav`
   transition: 0.2s ease-in-out;
 `
 
-const StyledLink = styled(AnchorLink)`
+const LinkStyle = css`
   position: relative;
   z-index: 2;
 
@@ -91,6 +92,13 @@ const StyledLink = styled(AnchorLink)`
       height: 36px;
     }
   }
+`
+
+const StyledAnchorLink = styled(AnchorLink)`
+  ${LinkStyle}
+`
+const StyledLink = styled(Link)`
+  ${LinkStyle}
 `
 
 const MenuButtonLine = styled.div`
@@ -195,7 +203,7 @@ export default function Navigation() {
           <MenuButtonLine />
         </MenuButton>
         <StyledNav aria-expanded={menuOpened} aria-hidden={!menuOpened}>
-          <StyledLink
+          <StyledAnchorLink
             to="/#projects"
             title="Projects"
             onAnchorLinkClick={handleMenuClose}
@@ -203,7 +211,7 @@ export default function Navigation() {
               tabIndex: menuOpened ? "0" : "-1",
             }}
           />
-          <StyledLink
+          <StyledAnchorLink
             to="/#about"
             title="About"
             onAnchorLinkClick={handleMenuClose}
@@ -214,11 +222,11 @@ export default function Navigation() {
           <StyledLink
             to="/cv"
             title="CV"
-            onAnchorLinkClick={handleMenuClose}
-            gatsbyLinkProps={{
-              tabIndex: menuOpened ? "0" : "-1",
-            }}
-          />
+            onClick={handleMenuClose}
+            tabIndex={menuOpened ? "0" : "-1"}
+          >
+            CV
+          </StyledLink>
         </StyledNav>
       </Container>
     </StyledHeader>

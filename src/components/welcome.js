@@ -48,6 +48,7 @@ const WavingHand = styled.span`
   position: absolute;
   animation: 2s ease-in-out infinite alternate wave;
   transform-origin: bottom right;
+  font-weight: 100;
 
   @keyframes wave {
     0%,
@@ -143,22 +144,42 @@ export default function Welcome() {
           </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/dobromiryor/" className="link">
+          <a
+            href="https://www.linkedin.com/in/dobromiryor/"
+            className="link"
+            target="_blank"
+            rel="noreferrer"
+          >
             LinkedIn
           </a>
         </li>
         <li>
-          <a href="https://github.com/dobromiryor/" className="link">
+          <a
+            href="https://github.com/dobromiryor/"
+            className="link"
+            target="_blank"
+            rel="noreferrer"
+          >
             Github
           </a>
         </li>
         <li>
-          <a href="https://codepen.io/dobromiryor/" className="link">
+          <a
+            href="https://codepen.io/dobromiryor/"
+            className="link"
+            target="_blank"
+            rel="noreferrer"
+          >
             CodePen
           </a>
         </li>
         <li>
-          <a href="https://www.instagram.com/dobromir.yor/" className="link">
+          <a
+            href="https://www.instagram.com/dobromir.yor/"
+            className="link"
+            target="_blank"
+            rel="noreferrer"
+          >
             Instagram
           </a>
         </li>

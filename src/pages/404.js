@@ -23,7 +23,7 @@ const Graphic = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", "Raleway", sans-serif;
   font-size: 5rem;
   font-weight: 800;
   transition: 0.2s ease-in-out;
@@ -49,6 +49,7 @@ const Graphic = styled.div`
     animation: 4s infinite alternate ease-in-out turn;
     position: relative;
     transform-origin: center;
+    font-weight: 100;
     z-index: 2;
 
     &::after {

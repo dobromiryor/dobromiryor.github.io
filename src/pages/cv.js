@@ -28,8 +28,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1,h2,h3,h4,h5{
-      font-family: ${props =>
-        props.bul ? "'Raleway', sans-serif;" : "'Poppins', sans-serif"};
+      font-family: 'Poppins', 'Raleway', sans-serif;
     }
     h1,h2,h3{
       font-weight: ${props => (props.bul ? "800" : "700")};
@@ -95,7 +94,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .gap-m{
-    gap: 8px;
+    gap: 12px;
   }
 
   .gap-l{
@@ -176,7 +175,7 @@ const Options = styled.nav`
     border: none;
     border-radius: 8px;
     box-shadow: var(--border-shadow);
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
     cursor: pointer;
 
     a {
@@ -390,8 +389,8 @@ export default function CV() {
               <ul className="col gap-m">
                 {cv.experience.list.map((item, index) => (
                   <li key={`experience-${index}`} className="col gap-s">
-                    <h3>{item.position}</h3>
-                    <h4>{item.company}</h4>
+                    <h3>{item.company}</h3>
+                    <h4>{item.position}</h4>
                     <h5>{item.period}</h5>
                     <ul className="col gap-xs" aria-label="task list">
                       {item.tasks.map((item, index) => (

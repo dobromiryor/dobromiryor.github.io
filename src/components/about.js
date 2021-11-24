@@ -131,9 +131,17 @@ export default function About() {
         ).
       </p>
       <p>
-        I am currently looking for a workplace to apply and improve my skill
-        set. I'm also open to hearing about project opportunities so feel free
-        to{" "}
+        I am currently working as a Front-end Developer at{" "}
+        <StyledLinkSpan>
+          <a
+            href="https://sentecacommerce.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            SentecaCommerce
+          </a>
+        </StyledLinkSpan>
+        . I'm also open to hearing about project opportunities so feel free to{" "}
         <StyledLinkSpan>
           <a
             href="mailto:dobromiryor@gmail.com"
