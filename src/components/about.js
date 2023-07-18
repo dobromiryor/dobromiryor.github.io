@@ -131,17 +131,7 @@ export default function About() {
         ).
       </p>
       <p>
-        I am currently working as a Front-end Developer at{" "}
-        <StyledLinkSpan>
-          <a
-            href="https://sentecacommerce.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            SentecaCommerce
-          </a>
-        </StyledLinkSpan>
-        . I'm also open to hearing about project opportunities so feel free to{" "}
+        I am currently looking for new opportunities so feel free to{" "}
         <StyledLinkSpan>
           <a
             href="mailto:dobromiryor@gmail.com"

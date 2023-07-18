@@ -52,7 +52,7 @@ const Profile = styled.div`
 `
 
 const Name = styled.div`
-  font-family: "Poppins", "Raleway", sans-serif;
+  font-family: "Rubik", sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
 `

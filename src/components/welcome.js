@@ -118,7 +118,6 @@ export default function Welcome() {
       <h1 className="title">
         <div>
           <span>Hello there</span>
-          {/* eslint-disable jsx-a11y/accessible-emoji */}
           <WavingHand
             role="img"
             aria-hidden="true"

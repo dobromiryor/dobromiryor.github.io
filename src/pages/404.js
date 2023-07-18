@@ -23,7 +23,7 @@ const Graphic = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Poppins", "Raleway", sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 5rem;
   font-weight: 800;
   transition: 0.2s ease-in-out;

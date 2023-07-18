@@ -40,7 +40,7 @@ const StyledArticle = styled.article`
 
 const TextContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
   gap: 16px;
 `
 

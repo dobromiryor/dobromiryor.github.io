@@ -4,7 +4,7 @@
     "lastName": "Yordanov",
     "city": "Plovdiv",
     "country": "Bulgaria",
-    "website": "dobromiryor.github.io",
+    "website": "http://dobromiryor.github.io",
     "email": "dobromir.yor@gmail.com",
     "phone": "+359896896834",
     "skills": {
@@ -13,16 +13,26 @@
         "HTML",
         "CSS",
         "SCSS/SASS",
+        "tailwindcss",
+        "styled-components",
         "JavaScript",
         "TypeScript",
         "jQuery",
         "React",
+        "React Native",
+        "Redux",
+        "RTK Query",
         "Gatsby",
         "D3",
-        "Bootstrap",
+        "yup",
+        "zod",
+        "Formik",
+        "React Hook Form",
+        "React Table",
         "Git",
         "Responsive Design",
         "Figma",
+        "Framer",
         "Adobe Photoshop",
         "Adobe Illustrator"
       ]
@@ -35,9 +45,20 @@
       "title": "Relevant Experience",
       "list": [
         {
+          "company": "Browserbite",
+          "position": "Front End Developer",
+          "period": "February 2022 - July 2023",
+          "tasks": [
+            "Developed web and mobile minimum viable product (MVP) applications for diverse sectors such as legal, logistics and restaurant services.",
+            "Utilized React/React Native, TypeScript, RTK Query, tailwindcss, variety of UI libraries",
+            "Implemented complex business logic, overcoming technical challenges and achieving desired functionality.",
+            "Collaborated with multidisciplinary teams to achieve project objectives."
+          ]
+        },
+        {
           "company": "SentecaCommerce",
           "position": "Front End Developer",
-          "period": "June 2021 - Present",
+          "period": "June 2021 - February 2022",
           "tasks": [
             "Developing fast ecommerce websites using React on top of SentecaCommerce's proprietary platform.",
             "Transforming Figma designs into functioning pages using styled-components and tailwindcss."
@@ -111,7 +132,7 @@
     "lastName": "Йорданов",
     "city": "Пловдив",
     "country": "България",
-    "website": "dobromiryor.github.io",
+    "website": "http://dobromiryor.github.io",
     "email": "dobromir.yor@gmail.com",
     "phone": "+359896896834",
     "skills": {
@@ -120,16 +141,24 @@
         "HTML",
         "CSS",
         "SCSS/SASS",
+        "tailwindcss",
+        "styled-components",
         "JavaScript",
         "TypeScript",
         "jQuery",
         "React",
+        "React Native",
+        "Redux",
+        "RTK Query",
         "Gatsby",
         "D3",
-        "Bootstrap",
+        "yup/zod",
+        "Formik/React Hook Form",
+        "React Table",
         "Git",
         "Responsive Design",
         "Figma",
+        "Framer",
         "Adobe Photoshop",
         "Adobe Illustrator"
       ]
@@ -142,9 +171,20 @@
       "title": "Приложим опит",
       "list": [
         {
+          "company": "Browserbite",
+          "position": "Front End Developer",
+          "period": "Февруари 2022 - Юли 2023",
+          "tasks": [
+            "Разработка на уеб и мобилни minimum viable product (MVP) приложения за разнообразни сектори като юридически, логистични и ресторантьорски услуги.",
+            "Използване на React/React Native, TypeScript, RTK Query, tailwindcss и различни UI библиотеки.",
+            "Имплементация на сложна бизнес логика, преодоляване на технически предизвикателства и постигане на желаната функционалност.",
+            "Сътрудничество с мултидисциплинарни екипи за постигане на целите на проекта."
+          ]
+        },
+        {
           "company": "SentecaCommerce",
           "position": "Front End Developer",
-          "period": "Юни 2021 - Настояще",
+          "period": "Юни 2021 - Февруари 2022",
           "tasks": [
             "Разработване на бързи ecommerce уебсайтове използвайки React, върху платформата на SentecaCommerce.",
             "Превръщане на Figma дизайни във функционални страници, използвайки styled-components и tailwindcss."

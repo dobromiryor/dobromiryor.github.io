@@ -24,14 +24,14 @@ const GlobalStyle = createGlobalStyle`
 
     h1, h2, h3, h4, h5, p, a, span, li {
       margin: 0;
-      line-height: 1em;
     }
 
     h1,h2,h3,h4,h5{
-      font-family: 'Poppins', 'Raleway', sans-serif;
+      font-family: 'Rubik', sans-serif;
     }
-    h1,h2,h3{
-      font-weight: ${props => (props.bul ? "800" : "700")};
+
+    h5 {
+      font-weight: 400;
     }
   }
 
@@ -104,6 +104,25 @@ const GlobalStyle = createGlobalStyle`
   .gap-xl{
     gap: 32px;
   }
+  
+  .mt-s{
+    margin-top: 4px;
+  }
+
+  .mw25{
+    width: 100%;
+    max-width: 25%;
+  }
+
+  .mw75{
+    width: 100%;
+    max-width: 75%;
+  }
+
+  .mw75h{
+    width: 100%;
+    max-width: calc(75% /2);
+  }
 
   .mw33{
     width: 100%;
@@ -117,6 +136,10 @@ const GlobalStyle = createGlobalStyle`
 
   .task{
     list-style: inside;
+
+    &::marker{
+      content: '•  ';
+    }
   }
 
   @media screen and (max-width: 922px){
@@ -377,22 +400,22 @@ export default function CV() {
           </button>
         </div>
       </Options>
-      <article className="container gap-xl">
+      <article className="container">
         <section className="col">
           <h1 className="uppercase name">{cv.firstName}</h1>
           <h1 className="uppercase name">{cv.lastName}</h1>
         </section>
         <div className="row to-col gap-xl">
-          <div className="col gap-xl mw66">
+          <div className="col gap-xl mw75">
             <section className="col gap-l">
               <h2 className="uppercase">{cv.experience.title}</h2>
-              <ul className="col gap-m">
+              <ul className="col gap-l bb-1">
                 {cv.experience.list.map((item, index) => (
-                  <li key={`experience-${index}`} className="col gap-s">
+                  <li key={`experience-${index}`} className="col gap-s ">
                     <h3>{item.company}</h3>
                     <h4>{item.position}</h4>
                     <h5>{item.period}</h5>
-                    <ul className="col gap-xs" aria-label="task list">
+                    <ul className="col gap-xs mt-s" aria-label="task list">
                       {item.tasks.map((item, index) => (
                         <li key={`tasks-${index}`} className="task">
                           {item}
@@ -415,7 +438,7 @@ export default function CV() {
                 ))}
               </ul>
             </section>
-            <section className="col gap-l">
+            {/* <section className="col gap-l">
               <h2 className="uppercase">{cv.certifications.title}</h2>
               <ul className="col gap-m">
                 {cv.certifications.list.map((item, index) => (
@@ -427,9 +450,9 @@ export default function CV() {
                   </li>
                 ))}
               </ul>
-            </section>
+            </section> */}
           </div>
-          <div className="col gap-xl mw33">
+          <div className="col gap-xl mw25">
             <section className="col gap-l">
               <h2 className="uppercase">{cv.skills.title}</h2>
               <ul className="col gap-xs">
@@ -449,20 +472,20 @@ export default function CV() {
           </div>
         </div>
         <section className="row gap-m print-only">
-          <div className="col mw33 gap-s">
+          <div className="col gap-s mw75h">
             <p className="bold">
               {cv.firstName} {cv.lastName}
             </p>
             <a
               className="bold"
-              href={`https://${cv.website}`}
+              href={cv.website}
               target="_blank"
               rel="noreferrer"
             >
               {cv.website}
             </a>
           </div>
-          <div className="col mw33 gap-s">
+          <div className="col gap-s mw75h">
             <a className="bold" href={`tel:${cv.phone}`}>
               {cv.phone}
             </a>
@@ -470,7 +493,7 @@ export default function CV() {
               {cv.email}
             </a>
           </div>
-          <div className="col mw33 gap-s">
+          <div className="col mw25 gap-s">
             <p className="bold">{cv.city}</p>
             <p className="bold">{cv.country}</p>
           </div>

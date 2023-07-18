@@ -6,6 +6,7 @@
 
 module.exports = {
   /* Your site config here */
+  trailingSlash: 'always',
   plugins: [
     {
       resolve: "gatsby-plugin-anchor-links",
