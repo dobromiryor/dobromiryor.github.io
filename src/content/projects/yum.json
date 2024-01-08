@@ -1,0 +1,33 @@
+{
+  "title": "Yum",
+  "description": "A Remix recipe app with internationalization, detailed instructions, servings calculation, unit conversion, ratings and comments.",
+  "credits": [
+    {
+      "text": "Emails sent by ",
+      "name": "SendGrid",
+      "link": "https://sendgrid.com/"
+    },
+    {
+      "text": "Images hosted at ",
+      "name": "Cloudinary",
+      "link": "https://cloudinary.com/"
+    },
+    {
+      "text": "App hosted at ",
+      "name": "Fly.io",
+      "link": "https://fly.io/"
+    }
+  ],
+  "link": "https://yum.fly.dev/",
+  "stack": [
+    { "name": "TypeScript", "class": "ts" },
+    { "name": "React", "class": "react" },
+    { "name": "Remix", "class": "remix" },
+    { "name": "PostgreSQL", "class": "postgres" },
+    { "name": "Prisma", "class": "prisma" },
+    { "name": "Tailwind", "class": "tw" },
+    { "name": "i18next", "class": "i18n" },
+    { "name": "PWA", "class": "pwa" }
+  ],
+  "slug": "yum"
+}

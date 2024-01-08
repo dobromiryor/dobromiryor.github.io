@@ -14,8 +14,8 @@
 }
 
 .react {
-  background-color: #61dbfb !important;
-  color: #1f232a !important;
+  background-color: #149eca !important;
+  color: #23272f !important;
 }
 
 .nodejs {
@@ -25,5 +25,35 @@
 
 .pwa {
   background-color: #5a0fc8 !important;
+  color: #ffffff !important;
+}
+
+.prisma {
+  background-color: #f1f3f4 !important;
+  color: #0c344b !important;
+}
+
+.ts {
+  background-color: #2f74c0 !important;
+  color: #ffffff !important;
+}
+
+.postgres {
+  background-color: #31648c !important;
+  color: #ffffff !important;
+}
+
+.remix {
+  background-color: #eaf2ff !important;
+  color: #000000 !important;
+}
+
+.i18n {
+  background-color: #009789 !important;
+  color: #ffffff !important;
+}
+
+.tw {
+  background-color: #38bdf8 !important;
   color: #ffffff !important;
 }
