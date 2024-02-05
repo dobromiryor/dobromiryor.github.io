@@ -255,7 +255,7 @@ self.__precacheManifest = [
   },
   {
     "url": "cv/index.html",
-    "revision": "130838d540ef08009ff70f30666daa6b"
+    "revision": "da6468fae56bef156d1059c69ff10b21"
   },
   {
     "url": "favicon.ico",
@@ -388,7 +388,7 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/3575165810.json",
-    "revision": "72ff098bf22a0a55c43bae150e567250"
+    "revision": "2d2d78a7ed9436771dd59aed17503c46"
   },
   {
     "url": "page-data/sq/d/604804298.json",
