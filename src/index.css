@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: "Rubik", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: <weight>;
+		font-style: normal;
+		src: url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+	}
+
+	:root {
+		color-scheme: light dark;
+		color: #d6d3d1; /*  stone-300 */
+		background-color: #262626; /* neutral-800 */
+
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	body {
+		margin: 0;
+	}
+
+	#root {
+		height: 100vh;
+	}
+
+	@media (prefers-color-scheme: light) {
+		:root {
+			color: #262626;
+			background-color: #d6d3d1;
+			pagebreakafter: "avoid";
+		}
+	}
+
+	@media print {
+		:root {
+			color: #000;
+			background-color: #fff;
+		}
+
+		@page {
+			margin: 0;
+			size: A4 portrait;
+		}
+	}
+}
