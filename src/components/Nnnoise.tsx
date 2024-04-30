@@ -7,8 +7,6 @@ import { useTheme } from "../hooks/useTheme";
 const MIN = 1;
 const MAX = 1000;
 
-const TWO_XL = 1536;
-
 const FILTERS = [
 	{ id: "red", color: "#f44336", baseSeed: 2 },
 	{ id: "purple", color: "#9c27b0", baseSeed: 4 },
@@ -20,7 +18,7 @@ const FILTERS = [
 ];
 
 export const Nnnoise = () => {
-	const [size, setSize] = useState(TWO_XL);
+	const [size, setSize] = useState(0);
 	const theme = useTheme();
 
 	const seedModifier = Math.floor(Math.random() * (MAX - MIN + 1) + MIN);
@@ -34,14 +32,18 @@ export const Nnnoise = () => {
 			);
 
 		window.addEventListener("resize", onResize);
+		window.addEventListener("load", onResize);
 
-		return () => window.removeEventListener("resize", onResize);
+		return () => {
+			window.removeEventListener("resize", onResize);
+			window.removeEventListener("load", onResize);
+		};
 	}, []);
 
 	return (
 		<svg
 			className={clsx(
-				"print:hidden pointer-events-none fixed top-0 left-0 overflow-hidden"
+				"print:hidden pointer-events-none fixed top-0 left-0 overflow-hidden z-50"
 			)}
 			height={size}
 			opacity={theme === Theme.DARK ? "0.05" : "0.25"}
