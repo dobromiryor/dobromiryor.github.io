@@ -9,47 +9,43 @@ import {
 } from "react";
 import { Vector3, type Mesh } from "three";
 
-import DARK from "../consts/3d-dark.const";
-import LIGHT from "../consts/3d-light.const";
-import { Theme } from "../enums/theme.enum";
-import { useTheme } from "../hooks/useTheme";
-import { type Letter } from "../types/letter.type";
+import DARK from "../../consts/3d-dark.const";
+import LIGHT from "../../consts/3d-light.const";
+import { Theme } from "../../enums/theme.enum";
+import { useGravity } from "../../hooks/useGravity";
+import { useTheme } from "../../hooks/useTheme";
+import { type Letter } from "../../types/letter.type";
 
 interface LetterProps {
 	letter: Letter;
 	letters: Letter[];
 	setLetters: Dispatch<SetStateAction<Letter[]>>;
-	isRunning: boolean;
 }
 
-export const Letter3D = ({
-	letter,
-	letters,
-	setLetters,
-	isRunning,
-}: LetterProps) => {
+export const Letter3D = ({ letter, letters, setLetters }: LetterProps) => {
 	const bodyRef = useRef<RapierRigidBody>(null);
 	const textRef = useRef<Mesh>(null);
 
 	const theme = useTheme();
+	const [isRunning] = useGravity();
 
 	const position = useMemo(
 		() =>
-			(textRef.current
-				? [
+			textRef.current
+				? new Vector3(
 						letters
 							.filter(
 								(item) => item.row === letter.row && item.index < letter.index
 							)
 							.reduce(
 								(acc, curr) =>
-									curr.character === " " ? acc + 0.3 : acc + curr.max.x,
+									curr.character === " " ? acc + 0.3 : acc + (curr.max?.x ?? 0),
 								0
 							),
 						-letter.row * 1.5,
-						0,
-					]
-				: [letter.index * 0.75, -letter.row * 1.5, 0]) as unknown as Vector3,
+						0
+					)
+				: new Vector3(letter.index * 0.75, -letter.row * 1.5, letter.index),
 		[letter.index, letter.row, letters]
 	);
 
@@ -66,8 +62,7 @@ export const Letter3D = ({
 				if (foundItem >= 0) {
 					const arr = [...prev];
 
-					arr[foundItem].max =
-						textRef.current?.geometry.boundingBox?.max ?? new Vector3();
+					arr[foundItem].max = textRef.current?.geometry.boundingBox?.max;
 
 					return arr;
 				} else {
@@ -99,6 +94,7 @@ export const Letter3D = ({
 			angularDamping={0.1}
 			colliders="cuboid"
 			friction={0.5}
+			gravityScale={isRunning ? 1 : 0}
 			linearDamping={0.1}
 			position={position}
 			restitution={0.3}

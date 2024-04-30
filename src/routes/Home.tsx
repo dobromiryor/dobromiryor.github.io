@@ -1,4 +1,4 @@
-import { Canvas3D } from "../components/Canvas3D";
+import { Canvas3D } from "../components/3D/Canvas3D";
 import { Head } from "../components/Head";
 import { Projects } from "../components/Projects";
 import { useObserver } from "../hooks/useObserver";

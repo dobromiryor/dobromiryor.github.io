@@ -11,7 +11,8 @@ import {
 import { DoubleSide, ExtrudeGeometry, Vector3 } from "three";
 import { SVGLoader } from "three/examples/jsm/Addons.js";
 
-import { type Letter } from "../types/letter.type";
+import { useGravity } from "../../hooks/useGravity";
+import { type Letter } from "../../types/letter.type";
 
 import wavingHand from "/waving_hand.svg";
 
@@ -19,37 +20,33 @@ interface Hand3DProps {
 	letter: Letter;
 	letters: Letter[];
 	setLetters: Dispatch<SetStateAction<Letter[]>>;
-	isRunning: boolean;
 }
 
 extend({ ExtrudeGeometry });
 
-const ROTATION_VELOCITY = 0.2;
+const ROTATION_VELOCITY = -0.05;
 
 enum Rotation {
 	CLOCKWISE = ROTATION_VELOCITY,
 	COUNTER_CLOCKWISE = -ROTATION_VELOCITY,
 }
 
-export const Hand3D = ({
-	letter,
-	letters,
-	setLetters,
-	isRunning,
-}: Hand3DProps) => {
+export const Hand3D = ({ letter, letters, setLetters }: Hand3DProps) => {
 	const [rotation, setRotation] = useState<Rotation>(Rotation.CLOCKWISE);
+
 	const svgData = useLoader(SVGLoader, wavingHand);
 	const shapes = useMemo(() => {
 		return svgData.paths.map((p) => p.toShapes(true));
 	}, [svgData]);
 
+	const [isRunning] = useGravity();
+
 	const bodyRef = useRef<RapierRigidBody>(null);
 	const geometryRef = useRef<ExtrudeGeometry>(null);
 
 	const rotate = (nextRotation: Rotation) => {
-		// bodyRef.current?.resetTorques(true);
-
-		bodyRef.current?.addTorque(new Vector3(0, 0, nextRotation), true);
+		bodyRef.current?.applyTorqueImpulse(new Vector3(0, 0, nextRotation), true);
+		bodyRef.current?.resetTorques(true);
 
 		setRotation(nextRotation);
 	};
@@ -62,21 +59,21 @@ export const Hand3D = ({
 
 	const position = useMemo(
 		() =>
-			(geometryRef.current
-				? [
+			geometryRef.current
+				? new Vector3(
 						letters
 							.filter(
 								(item) => item.row === letter.row && item.index < letter.index
 							)
 							.reduce(
 								(acc, curr) =>
-									curr.character === " " ? acc + 0.1 : acc + curr.max.x,
+									curr.character === " " ? acc + 0.1 : acc + (curr.max?.x ?? 0),
 								0
 							),
-						1.25,
-						0.2,
-					]
-				: [letter.index * 0.6, 1.25, 0.2]) as unknown as Vector3,
+						1.5,
+						0.2
+					)
+				: new Vector3(letter.index * 0.65, 1.5, 0.2),
 		[letter.index, letter.row, letters]
 	);
 
@@ -93,8 +90,7 @@ export const Hand3D = ({
 				if (foundItem >= 0) {
 					const arr = [...prev];
 
-					arr[foundItem].max =
-						geometryRef.current?.boundingBox?.max ?? new Vector3();
+					arr[foundItem].max = geometryRef.current?.boundingBox?.max;
 
 					return arr;
 				} else {
@@ -105,8 +101,10 @@ export const Hand3D = ({
 	}, [letter, setLetters]);
 
 	useEffect(() => {
+		let timeout: ReturnType<typeof setTimeout> | undefined;
+
 		const switchRotation = async () => {
-			setTimeout(() => {
+			timeout = setTimeout(() => {
 				switch (rotation) {
 					case Rotation.CLOCKWISE:
 						return rotate(Rotation.COUNTER_CLOCKWISE);
@@ -121,6 +119,8 @@ export const Hand3D = ({
 		} else {
 			stop();
 		}
+
+		return () => clearTimeout(timeout);
 	}, [isRunning, rotation]);
 
 	useEffect(() => {
@@ -131,19 +131,16 @@ export const Hand3D = ({
 
 	useEffect(() => {
 		if (!isRunning) {
-			bodyRef.current?.sleep();
-		}
-	}, [isRunning]);
-
-	useEffect(() => {
-		if (!isRunning) {
-			bodyRef.current?.addTorque(
-				new Vector3(0, 0, ROTATION_VELOCITY / 2),
-				true
-			);
 			bodyRef.current?.setEnabledRotations(false, false, true, true);
 		}
 	}, [isRunning]);
+
+	if (
+		letters.filter((item) => item.row > 0 && item.max !== new Vector3())
+			.length <= 0
+	) {
+		return null;
+	}
 
 	return (
 		<RigidBody
@@ -151,10 +148,11 @@ export const Hand3D = ({
 			angularDamping={1}
 			colliders="hull"
 			friction={0.5}
+			gravityScale={isRunning ? 1 : 0}
 			linearDamping={0.1}
 			position={position}
 			restitution={0.3}
-			rotation={[-Math.PI, 0, 0]}
+			rotation={[-Math.PI, 0, Math.PI / 4]}
 			userData-initialPosition={position}
 		>
 			<group scale={0.01}>

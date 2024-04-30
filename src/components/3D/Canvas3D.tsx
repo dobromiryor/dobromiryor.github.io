@@ -1,4 +1,10 @@
-import { Center, OrthographicCamera } from "@react-three/drei";
+import {
+	CameraControls,
+	Center,
+	Loader,
+	OrthographicCamera,
+	PerformanceMonitor,
+} from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import {
 	CuboidCollider,
@@ -10,9 +16,13 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
 import { Object3D, Vector3, type OrthographicCamera as OCam } from "three";
 
-import { useGravity } from "../hooks/useGravity";
-import { useObserver } from "../hooks/useObserver";
-import { type Letter } from "../types/letter.type";
+import { GAME_GROUP_POSITION } from "../../consts/game-group-position.const";
+import { GameState } from "../../enums/game-state.enum";
+import { useGame } from "../../hooks/useGame";
+import { useGravity } from "../../hooks/useGravity";
+import { useObserver } from "../../hooks/useObserver";
+import { type Letter } from "../../types/letter.type";
+import { GameController } from "./GameController";
 import { Hand3D } from "./Hand3D";
 import { Image3D } from "./Image3D";
 import { Letter3D } from "./Letter3D";
@@ -20,6 +30,7 @@ import { Letter3D } from "./Letter3D";
 const text = ["Hello there! #", "I'm Dobromir", "Yordanov"];
 
 export const Canvas3D = () => {
+	const [dpr, setDpr] = useState(1.5);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [letters, setLetters] = useState<Letter[]>(
 		text
@@ -28,17 +39,19 @@ export const Canvas3D = () => {
 					character,
 					index,
 					row: rowIndex,
-					max: new Vector3(),
+					max: undefined,
 				}))
 			)
 			.flat()
 	);
 
 	const [ref, bounds] = useMeasure();
+	const { state } = useGame();
 	const [isRunning, setIsRunning] = useGravity();
 	const [_ref, isIntersecting] = useObserver({ isSingleUse: true });
 
 	const cameraRef = useRef<OCam>(null);
+	const cameraControlsRef = useRef<CameraControls>(null);
 	const lightTarget = useRef(new Object3D());
 
 	const frustum = 800;
@@ -47,22 +60,27 @@ export const Canvas3D = () => {
 	const horizontal = aspectRatio < 1 ? frustum / aspectRatio : frustum;
 	const vertical = aspectRatio < 1 ? frustum : frustum * aspectRatio;
 
-	const floorSize = 25;
-	const floorPosition = (frustum / zoom) * aspectRatio;
+	const floorSize = 50;
 	const floorHeight = 1;
+	// keep the floor near the bottom of the canvas
+	const floorPosition =
+		aspectRatio > 1 ? (frustum / zoom) * aspectRatio : frustum / zoom;
 
 	const onIntersection = (e: CollisionPayload) => {
 		const { initialPosition } = e.rigidBodyObject?.userData ?? {
 			initialPosition: new Vector3(),
 		};
 
+		// teleport to initial position and reset linear velocities
 		e.rigidBody?.setTranslation(
 			new Vector3(...(initialPosition ? initialPosition : [0, 0, 0])),
 			true
 		);
-		e.rigidBody?.resetForces(true);
-		e.rigidBody?.resetTorques(true);
+		e.rigidBody?.setLinvel(new Vector3(), true);
 	};
+
+	// for touch devices only
+	const canHover = matchMedia("(hover: hover)").matches;
 
 	useEffect(() => {
 		lightTarget.current?.position.set(0, -4, 0);
@@ -78,24 +96,36 @@ export const Canvas3D = () => {
 		if (
 			letters.filter(
 				(item) =>
-					item.character !== " " &&
-					item.character !== "#" &&
-					(item.max.x === 0 || item.max.y === 0 || item.max.z === 0)
-			).length === 0
+					item.character !== " " && item.character !== "#" && item.max != null
+			).length !== 0
 		) {
 			setIsLoading(false);
 		}
 	}, [letters]);
 
+	useEffect(() => {
+		if (state === GameState.RUNNING) {
+			cameraControlsRef.current?.truck(GAME_GROUP_POSITION, 0, true);
+		} else if (state === GameState.FINISHED) {
+			cameraControlsRef.current?.truck(-GAME_GROUP_POSITION, 0, true);
+		}
+	}, [state]);
+
 	return (
-		<div
-			className={clsx(
-				"w-full h-screen transition-opacity duration-500",
-				isLoading ? "opacity-0" : "opacity-100"
-			)}
-		>
-			<Canvas ref={ref} orthographic>
+		<div className="relative w-full h-screen ">
+			<Canvas
+				ref={ref}
+				dpr={dpr}
+				className={clsx(
+					"transition-opacity duration-500",
+					isLoading ? "opacity-0" : "opacity-100"
+				)}
+			>
 				<Suspense>
+					<PerformanceMonitor
+						onDecline={() => setDpr(1)}
+						onIncline={() => setDpr(2)}
+					/>
 					<OrthographicCamera
 						ref={cameraRef}
 						makeDefault
@@ -107,8 +137,12 @@ export const Canvas3D = () => {
 						top={vertical}
 						zoom={zoom}
 					/>
-					{/* <OrbitControls /> */}
-					<Physics gravity={[0, isRunning ? -9.81 : 0, 0]}>
+					<CameraControls
+						ref={cameraControlsRef}
+						mouseButtons={{ left: 0, middle: 0, right: 0, wheel: 0 }}
+						touches={{ one: 0, two: 0, three: 0 }}
+					/>
+					<Physics gravity={[0, -9.81, 0]}>
 						{/* TODO: Check if react-three/eslint-plugin fixes no-unknown-property */}
 						{/* eslint-disable react/no-unknown-property */}
 						<directionalLight
@@ -116,8 +150,6 @@ export const Canvas3D = () => {
 							position={[0, -4, 10]}
 							target={lightTarget.current}
 						/>
-						{/* eslint-enable react/no-unknown-property */}
-						{/* eslint-disable react/no-unknown-property */}
 						<ambientLight intensity={1} position={[0, -4, 10]} />
 						{/* eslint-enable react/no-unknown-property */}
 						<Center>
@@ -126,7 +158,6 @@ export const Canvas3D = () => {
 									item.character === "#" ? (
 										<Hand3D
 											key={`Row__${item.row}__Hand__${item.index}`}
-											isRunning={isRunning}
 											letter={item}
 											letters={letters}
 											setLetters={setLetters}
@@ -134,7 +165,6 @@ export const Canvas3D = () => {
 									) : (
 										<Letter3D
 											key={`Row__${item.row}__Letter__${item.character}__${item.index}`}
-											isRunning={isRunning}
 											letter={item}
 											letters={letters}
 											setLetters={setLetters}
@@ -142,8 +172,9 @@ export const Canvas3D = () => {
 									)
 								)}
 							</Center>
-							<Image3D isRunning={isRunning} letters={letters} />
+							<Image3D letters={letters} />
 						</Center>
+						<GameController />
 						<CuboidCollider
 							args={[floorSize, floorHeight, floorSize]}
 							friction={0.1}
@@ -159,6 +190,20 @@ export const Canvas3D = () => {
 					</Physics>
 				</Suspense>
 			</Canvas>
+			<Loader
+				containerStyles={{ background: "none" }}
+				dataStyles={{ display: "none" }}
+			/>
+			{/* TODO: Check if CameraControls added a way to override touch events to be able to scroll
+			 * https://github.com/yomotsu/camera-controls/issues/436
+			 */}
+			{/* This overlay is only rendered on touch devices and is used to add touch events on top of the canvas to be able to scroll. */}
+			{!canHover && (
+				<div
+					className="absolute top-0 left-0 w-full h-full"
+					onClick={(e) => e.stopPropagation()}
+				/>
+			)}
 		</div>
 	);
 };

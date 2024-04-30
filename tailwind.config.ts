@@ -8,19 +8,17 @@ export default {
 		},
 		extend: {
 			screens: {
-				a4: "880px",
+				a4: "230mm",
 			},
 			animation: {
-				"custom-spin": "custom-spin 5000ms linear infinite",
+				"custom-ping": "1s custom-ping 3s cubic-bezier(0, 0, 0.2, 1)",
 				dash: "dash 500ms linear infinite ",
 			},
 			keyframes: {
-				"custom-spin": {
-					from: {
-						transform: "translate(-50%, -50%) rotate(0deg)",
-					},
-					to: {
-						transform: "translate(-50%, -50%) rotate(360deg)",
+				"custom-ping": {
+					"75%, 100%": {
+						transform: "scale(2)",
+						opacity: "0",
 					},
 				},
 				dash: {

@@ -4,5 +4,5 @@ export type Letter = {
 	character: string;
 	index: number;
 	row: number;
-	max: Vector3;
+	max: Vector3 | undefined;
 };
