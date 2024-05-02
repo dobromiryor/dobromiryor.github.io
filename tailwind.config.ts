@@ -8,6 +8,7 @@ export default {
 		},
 		extend: {
 			screens: {
+				"3xl": "2000px",
 				a4: "230mm",
 			},
 			animation: {

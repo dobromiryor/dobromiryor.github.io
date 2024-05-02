@@ -7,6 +7,7 @@ import { ScrollRestoration } from "./components/ScrollRestoration";
 import { Route as RouteEnum } from "./enums/route.enum";
 import { CV } from "./routes/CV";
 import { Home } from "./routes/Home";
+import { NotFound } from "./routes/NotFound";
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 					<Switch>
 						<Route component={Home} path={RouteEnum.HOME} />
 						<Route component={CV} path={RouteEnum.CV} />
+						<Route component={NotFound} path="*" />
 					</Switch>
 				</div>
 				<Footer />

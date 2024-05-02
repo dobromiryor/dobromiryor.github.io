@@ -142,7 +142,7 @@ export const Canvas3D = () => {
 						mouseButtons={{ left: 0, middle: 0, right: 0, wheel: 0 }}
 						touches={{ one: 0, two: 0, three: 0 }}
 					/>
-					<Physics gravity={[0, -9.81, 0]}>
+					<Physics>
 						{/* TODO: Check if react-three/eslint-plugin fixes no-unknown-property */}
 						{/* eslint-disable react/no-unknown-property */}
 						<directionalLight
