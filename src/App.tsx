@@ -1,4 +1,4 @@
-import { Route, Router, Switch } from "wouter";
+import { Redirect, Route, Router, Switch } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 
 import { Footer } from "./components/Footer";
@@ -16,8 +16,11 @@ function App() {
 				<div className="flex justify-center pb-40 print:pb-0">
 					<Switch>
 						<Route component={Home} path={RouteEnum.HOME} />
-						<Route component={CV} path={RouteEnum.CV} />
-						<Route component={NotFound} path="*" />
+						<Route path={RouteEnum.CV}>
+							<Redirect to={RouteEnum.CV_EN} />
+						</Route>
+						<Route component={CV} path={RouteEnum.CV_LANG} />
+						<Route component={NotFound} />
 					</Switch>
 				</div>
 				<Footer />

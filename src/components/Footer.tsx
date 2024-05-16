@@ -1,5 +1,6 @@
 import { useRoute } from "wouter";
 
+import { Route } from "../enums/route.enum";
 import { ExternalLink, Link } from "./Link";
 
 export const Footer = () => {
@@ -15,11 +16,11 @@ export const Footer = () => {
 					<ul className="flex gap-2">
 						<li>
 							{isHome ? (
-								<Link className="text-sm" href={"/cv"}>
+								<Link className="text-sm" href={Route.CV_EN}>
 									CV
 								</Link>
 							) : (
-								<Link className="text-sm" href={"/"}>
+								<Link className="text-sm" href={Route.HOME}>
 									Home
 								</Link>
 							)}

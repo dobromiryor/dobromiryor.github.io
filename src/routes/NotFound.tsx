@@ -13,6 +13,7 @@ import { Object3D, Vector3 } from "three";
 
 import { ThinkingFace } from "../components/3D/models/Thinking-face";
 import { Link } from "../components/Link";
+import { Route } from "../enums/route.enum";
 
 export const NotFound = () => {
 	const [dpr, setDpr] = useState(1.5);
@@ -74,7 +75,7 @@ export const NotFound = () => {
 			<div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
 				<div className="flex flex-col justify-between items-center gap-32 md:gap-60 3xl:gap-[480px]">
 					<h1 className="font-bold text-3xl">Page not found</h1>
-					<Link href="/">Go back</Link>
+					<Link href={Route.HOME}>Go back</Link>
 				</div>
 			</div>
 			<Loader

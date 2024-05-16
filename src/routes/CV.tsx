@@ -4,6 +4,7 @@ import { Button } from "../components/Button";
 import { Head } from "../components/Head";
 import { Link } from "../components/Link";
 import { CVs } from "../content/cvs.content";
+import { Route } from "../enums/route.enum";
 import { useLanguage } from "../hooks/useLanguage";
 
 const TITLE = "CV | Dobromir Yordanov";
@@ -44,12 +45,12 @@ export const CV = () => {
 			>
 				<div className="flex justify-between print:hidden px-4 mt-4 a4:w-[210mm] a4:p-0">
 					<div className="flex gap-2">
-						<Link href="/">Home</Link>
+						<Link href={Route.HOME}>Home</Link>
 						<Button onClick={handlePrint}>Print/Save as PDF</Button>
 					</div>
 					<div className="flex gap-2">
-						<Link href="?lang=bg">BG</Link>
-						<Link href="?lang=en">EN</Link>
+						<Link href={Route.CV_BG}>BG</Link>
+						<Link href={Route.CV_EN}>EN</Link>
 					</div>
 				</div>
 				<article className="flex flex-col justify-between gap-6 p-4 a4:w-[210mm] a4:min-h-[297mm] a4:border  a4:border-stone-400 a4:dark:border-neutral-700 print:w-[210mm] print:min-h-[297mm] a4:p-[10mm] print:p-[10mm] print:border-0">

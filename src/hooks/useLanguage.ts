@@ -1,28 +1,24 @@
 import { useEffect, useState } from "react";
-import { useLocation, useSearch } from "wouter";
+import { useLocation, useParams } from "wouter";
 
 import { Language } from "../enums/language.enum";
 
 export const useLanguage = () => {
 	const [lang, setLang] = useState(Language.EN);
 
-	const [_, setLocation] = useLocation();
-	const searchString = useSearch();
-	const langParam =
-		new URLSearchParams(searchString).get("lang") ?? Language.EN;
+	const [_, navigate] = useLocation();
+	const { lang: langParam } = useParams<{ lang: string }>();
 
 	useEffect(() => {
 		if (
-			!Object.values(Language as Record<string, string>).includes(
-				langParam as Language
-			)
+			!Object.values(Language as Record<string, string>).includes(langParam)
 		) {
 			setLang(Language.EN);
-			setLocation("?lang=en");
+			navigate(`/cv/${Language.EN}`);
 		} else {
 			setLang(langParam as Language);
 		}
-	}, [langParam, searchString, setLocation]);
+	}, [langParam, navigate]);
 
 	return lang;
 };
