@@ -11,7 +11,7 @@ import { Suspense, useMemo, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
 import { Object3D, Vector3 } from "three";
 
-import { ThinkingFace } from "../components/3D/models/Thinking-face";
+import { ThinkingFace } from "../components/3D/models/ThinkingFace";
 import { Link } from "../components/Link";
 import { Route } from "../enums/route.enum";
 

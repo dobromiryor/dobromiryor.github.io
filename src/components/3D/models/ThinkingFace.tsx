@@ -56,7 +56,7 @@ export function ThinkingFace({ groupProps, ...props }: ThinkingFaceProps) {
 	) as GLTFResult;
 
 	useEffect(() => {
-		let timeout: ReturnType<typeof setTimeout> | undefined;
+		let intervalID: ReturnType<typeof setInterval> | undefined;
 
 		const rotate = (nextRotation: Rotation) => {
 			ref.current?.applyTorqueImpulse(
@@ -73,19 +73,19 @@ export function ThinkingFace({ groupProps, ...props }: ThinkingFaceProps) {
 		};
 
 		const switchRotation = async () => {
-			timeout = setTimeout(() => {
-				switch (rotation) {
-					case Rotation.CLOCKWISE:
-						return rotate(Rotation.COUNTER_CLOCKWISE);
-					case Rotation.COUNTER_CLOCKWISE:
-						return rotate(Rotation.CLOCKWISE);
-				}
-			}, 3000);
+			switch (rotation) {
+				case Rotation.CLOCKWISE:
+					return rotate(Rotation.COUNTER_CLOCKWISE);
+				case Rotation.COUNTER_CLOCKWISE:
+					return rotate(Rotation.CLOCKWISE);
+			}
 		};
 
-		switchRotation();
+		if (!intervalID) {
+			intervalID = setInterval(switchRotation, 3000);
+		}
 
-		return () => clearTimeout(timeout);
+		return () => clearInterval(intervalID);
 	}, [isFirstRotation, rotation]);
 
 	return (

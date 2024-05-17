@@ -101,26 +101,25 @@ export const Hand3D = ({ letter, letters, setLetters }: Hand3DProps) => {
 	}, [letter, setLetters]);
 
 	useEffect(() => {
-		let timeout: ReturnType<typeof setTimeout> | undefined;
+		let intervalID: ReturnType<typeof setInterval> | undefined;
 
 		const switchRotation = async () => {
-			timeout = setTimeout(() => {
-				switch (rotation) {
-					case Rotation.CLOCKWISE:
-						return rotate(Rotation.COUNTER_CLOCKWISE);
-					case Rotation.COUNTER_CLOCKWISE:
-						return rotate(Rotation.CLOCKWISE);
-				}
-			}, 1000);
+			switch (rotation) {
+				case Rotation.CLOCKWISE:
+					return rotate(Rotation.COUNTER_CLOCKWISE);
+				case Rotation.COUNTER_CLOCKWISE:
+					return rotate(Rotation.CLOCKWISE);
+			}
 		};
 
-		if (!isRunning) {
-			switchRotation();
+		if (!intervalID && !isRunning) {
+			intervalID = setInterval(switchRotation, 2000);
 		} else {
 			stop();
+			clearInterval(intervalID);
 		}
 
-		return () => clearTimeout(timeout);
+		return () => clearInterval(intervalID);
 	}, [isRunning, rotation]);
 
 	useEffect(() => {
