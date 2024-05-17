@@ -7,7 +7,7 @@ import {
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useMemo, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
 import { Object3D, Vector3 } from "three";
 
@@ -16,7 +16,7 @@ import { Link } from "../components/Link";
 import { Route } from "../enums/route.enum";
 
 export const NotFound = () => {
-	const [dpr, setDpr] = useState(1.5);
+	const [dpr, setDpr] = useState(2);
 
 	const lightTarget = useRef(new Object3D());
 
@@ -24,9 +24,21 @@ export const NotFound = () => {
 
 	const frustum = 800;
 	const zoom = frustum * 0.1;
-	const aspectRatio = bounds.height / bounds.width;
-	const horizontal = aspectRatio < 1 ? frustum / aspectRatio : frustum;
-	const vertical = aspectRatio < 1 ? frustum : frustum * aspectRatio;
+
+	const aspectRatio = useMemo(
+		() => bounds.height / bounds.width,
+		[bounds.height, bounds.width]
+	);
+
+	const horizontal = useMemo(
+		() => (aspectRatio < 1 ? frustum / aspectRatio : frustum),
+		[aspectRatio]
+	);
+
+	const vertical = useMemo(
+		() => (aspectRatio < 1 ? frustum : frustum * aspectRatio),
+		[aspectRatio]
+	);
 
 	return (
 		<div className="relative w-full h-screen">

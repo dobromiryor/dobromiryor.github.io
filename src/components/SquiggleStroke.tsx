@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { type SVGProps } from "react";
+import { useMemo, type SVGProps } from "react";
 
 import { useTheme } from "../hooks/useTheme";
 
@@ -10,9 +10,14 @@ export const SquiggleStroke = ({
 	...props
 }: SquiggleStrokeProps) => {
 	const theme = useTheme();
-	const line = PATHS[Math.floor(Math.random() * PATHS.length)];
-	const gradients =
-		GRADIENTS[theme][Math.floor(Math.random() * GRADIENTS[theme].length)];
+	const line = useMemo(
+		() => PATHS[Math.floor(Math.random() * PATHS.length)],
+		[]
+	);
+	const gradients = useMemo(
+		() => GRADIENTS[theme][Math.floor(Math.random() * GRADIENTS[theme].length)],
+		[theme]
+	);
 
 	return (
 		<>
