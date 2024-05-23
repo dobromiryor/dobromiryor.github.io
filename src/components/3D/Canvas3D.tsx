@@ -38,9 +38,19 @@ export const Canvas3D = () => {
 
 	const frustum = 800;
 	const zoom = frustum * 0.1;
-	const aspectRatio = bounds.height / bounds.width;
-	const horizontal = aspectRatio < 1 ? frustum / aspectRatio : frustum;
-	const vertical = aspectRatio < 1 ? frustum : frustum * aspectRatio;
+	const aspectRatio = useMemo(
+		() => bounds.height / bounds.width,
+		[bounds.height, bounds.width]
+	);
+	const horizontal = useMemo(
+		() => (aspectRatio < 1 ? frustum / aspectRatio : frustum),
+		[aspectRatio]
+	);
+	const vertical = useMemo(
+		() => (aspectRatio < 1 ? frustum : frustum * aspectRatio),
+		[aspectRatio]
+	);
+	const isVertical = useMemo(() => aspectRatio > 1.5, [aspectRatio]);
 
 	const floorSize = 50;
 	const floorHeight = 1;

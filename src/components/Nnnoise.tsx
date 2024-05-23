@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Theme } from "../enums/theme.enum";
 import { useTheme } from "../hooks/useTheme";
@@ -21,24 +21,36 @@ export const Nnnoise = () => {
 	const [size, setSize] = useState(0);
 	const theme = useTheme();
 
-	const seedModifier = Math.floor(Math.random() * (MAX - MIN + 1) + MIN);
+	const seedModifier = useMemo(
+		() => Math.floor(Math.random() * (MAX - MIN + 1) + MIN),
+		[]
+	);
 
-	useEffect(() => {
-		const onResize = () =>
+	const onResize = useCallback(
+		() =>
 			setSize(
 				window.innerHeight >= window.innerWidth
 					? window.innerHeight
 					: window.innerWidth
-			);
+			),
+		[]
+	);
 
-		window.addEventListener("resize", onResize);
+	useEffect(() => {
 		window.addEventListener("load", onResize);
 
 		return () => {
 			window.removeEventListener("resize", onResize);
+		};
+	}, [onResize]);
+
+	useEffect(() => {
+		window.addEventListener("resize", onResize);
+
+		return () => {
 			window.removeEventListener("load", onResize);
 		};
-	}, []);
+	}, [onResize]);
 
 	return (
 		<svg
