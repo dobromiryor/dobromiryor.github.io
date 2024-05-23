@@ -46,6 +46,7 @@ interface ThinkingFaceProps extends RigidBodyProps {
 }
 
 export function ThinkingFace({ groupProps, ...props }: ThinkingFaceProps) {
+	const [isReady, setIsReady] = useState(false);
 	const [isFirstRotation, setIsFirstRotation] = useState(true);
 	const [rotation, setRotation] = useState<Rotation>(Rotation.CLOCKWISE);
 
@@ -55,12 +56,18 @@ export function ThinkingFace({ groupProps, ...props }: ThinkingFaceProps) {
 		"/models/thinking-face.glb"
 	) as GLTFResult;
 
+	useEffect(() => setIsReady(true), []);
+
 	useEffect(() => {
 		let intervalID: ReturnType<typeof setInterval> | undefined;
 
 		const rotate = (nextRotation: Rotation) => {
 			ref.current?.applyTorqueImpulse(
-				new Vector3(0, isFirstRotation ? nextRotation / 2 : nextRotation, 0),
+				new Vector3(
+					0,
+					isFirstRotation ? nextRotation / 2 : nextRotation - nextRotation / 10,
+					0
+				),
 				true
 			);
 			ref.current?.resetTorques(true);
@@ -72,7 +79,7 @@ export function ThinkingFace({ groupProps, ...props }: ThinkingFaceProps) {
 			setRotation(nextRotation);
 		};
 
-		const switchRotation = async () => {
+		const switchRotation = () => {
 			switch (rotation) {
 				case Rotation.CLOCKWISE:
 					return rotate(Rotation.COUNTER_CLOCKWISE);
@@ -81,18 +88,25 @@ export function ThinkingFace({ groupProps, ...props }: ThinkingFaceProps) {
 			}
 		};
 
-		if (!intervalID) {
-			intervalID = setInterval(switchRotation, 3000);
+		if (isReady) {
+			if (ref.current?.angvel().y === 0) {
+				switchRotation();
+			}
+
+			if (!intervalID) {
+				intervalID = setInterval(switchRotation, 3000);
+			}
 		}
 
 		return () => clearInterval(intervalID);
-	}, [isFirstRotation, rotation]);
+	}, [isFirstRotation, isReady, rotation]);
 
 	return (
 		<RigidBody
 			ref={ref}
 			angularDamping={1}
 			canSleep={false}
+			colliders="hull"
 			enabledRotations={[false, true, false]}
 			linearDamping={0.1}
 			rotation={new Euler(0, Math.PI, 0)}
