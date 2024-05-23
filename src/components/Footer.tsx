@@ -20,7 +20,7 @@ export const Footer = () => {
 									CV
 								</Link>
 							) : (
-								<Link className="text-sm" href={Route.HOME}>
+								<Link scrollToTop className="text-sm" href={Route.HOME}>
 									Home
 								</Link>
 							)}

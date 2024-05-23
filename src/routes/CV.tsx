@@ -45,7 +45,9 @@ export const CV = () => {
 			>
 				<div className="flex justify-between print:hidden px-4 mt-4 a4:w-[210mm] a4:p-0">
 					<div className="flex gap-2">
-						<Link href={Route.HOME}>Home</Link>
+						<Link scrollToTop href={Route.HOME}>
+							Home
+						</Link>
 						<Button onClick={handlePrint}>Print/Save as PDF</Button>
 					</div>
 					<div className="flex gap-2">
