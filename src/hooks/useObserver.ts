@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, type RefObject } from "react";
 
 import { ObserverContext } from "../providers/observer-provider";
 
@@ -6,7 +6,7 @@ interface ObserverProps extends IntersectionObserverInit {
 	isSingleUse?: boolean;
 }
 
-export const useObserver = (options?: ObserverProps) => {
+export const useObserver = ((options?: ObserverProps) => {
 	const { isSingleUse, ...observerOptions } = options ?? {};
 	const context = useContext(ObserverContext);
 
@@ -42,5 +42,5 @@ export const useObserver = (options?: ObserverProps) => {
 		};
 	}, [isSingleUse, observerOptions, ref, setIsIntersecting]);
 
-	return [ref, isIntersecting] as [typeof ref, typeof isIntersecting];
-};
+	return options !== undefined ? ref : isIntersecting;
+}) as ((options: ObserverProps) => RefObject<HTMLDivElement>) & (() => boolean);

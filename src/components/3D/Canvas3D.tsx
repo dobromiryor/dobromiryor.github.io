@@ -30,7 +30,7 @@ export const Canvas3D = () => {
 	const [ref, bounds] = useMeasure();
 	const { state } = useGame();
 	const [isRunning, setIsRunning] = useGravity();
-	const [_ref, isIntersecting] = useObserver({ isSingleUse: true });
+	const isIntersecting = useObserver();
 
 	const cameraRef = useRef<OCam>(null);
 	const cameraControlsRef = useRef<CameraControls>(null);
