@@ -1,7 +1,10 @@
 import { Html } from "@react-three/drei";
-
-import { CuboidCollider, IntersectionEnterPayload } from "@react-three/rapier";
+import {
+	CuboidCollider,
+	type IntersectionEnterPayload,
+} from "@react-three/rapier";
 import { Vector3 } from "three";
+
 import { GAME_GROUP_POSITION } from "../../consts/game-group-position.const";
 import { GameSide } from "../../enums/game-side.enum";
 import { GameSign } from "../../enums/game-sign.enum";
@@ -9,7 +12,11 @@ import { GameState } from "../../enums/game-state.enum";
 import { useGame } from "../../hooks/useGame";
 import { Icon } from "../Icon";
 
-export const GameController = () => {
+interface GameControllerProps {
+	isVertical: boolean;
+}
+
+export const GameController = ({ isVertical }: GameControllerProps) => {
 	const { addSign, computerPoints, playerPoints, signs, state, winner } =
 		useGame();
 
@@ -19,18 +26,17 @@ export const GameController = () => {
 		};
 
 		// launch winning sign towards the losing sign
-		e.rigidBody?.applyImpulse(new Vector3(sideVelocity, 0, 0), true);
+		e.rigidBody?.applyImpulse(new Vector3(sideVelocity ?? 0, 0, 0), true);
 	};
+
+	if (state === GameState.FINISHED && signs.length === 0) {
+		return null;
+	}
 
 	return (
 		// eslint-disable-next-line react/no-unknown-property
 		<group position={[GAME_GROUP_POSITION, 0, 0]}>
-			<Html
-				transform
-				position={[0, 0, 10]}
-				scale={0.5}
-				className="scale-[2]"
-			>
+			<Html transform position={[0, 0, 10]} scale={isVertical ? 2 : 1}>
 				{state === GameState.INITIAL ? null : winner != null ? (
 					<span className="text-xl font-bold">
 						{winner === GameSide.COMPUTER ? "You lost 🫤" : "You won! 👏"}
@@ -40,9 +46,9 @@ export const GameController = () => {
 						<div className="flex gap-2 justify-center items-center">
 							<div className="flex justify-center items-center w-12 h-12 rounded-full bg-sky-300">
 								<Icon
-									icon="silhouette"
 									aria-label={`Player points: ${playerPoints}`}
 									className="w-8 h-8 z-10"
+									icon="silhouette"
 								/>
 							</div>
 							<span className="text-xl font-bold">
