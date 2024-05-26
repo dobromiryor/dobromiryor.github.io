@@ -85,9 +85,17 @@ export const Canvas3D = () => {
 	}, [isIntersecting, isRunning, setIsRunning]);
 
 	useEffect(() => {
-		if (state === GameState.RUNNING) {
+		const position = cameraControlsRef.current?.getPosition(
+			new Vector3(),
+			true
+		);
+
+		if (state === GameState.RUNNING && position?.x === (0 ?? undefined)) {
 			cameraControlsRef.current?.truck(GAME_GROUP_POSITION, 0, true);
-		} else if (state === GameState.FINISHED) {
+		} else if (
+			state === GameState.FINISHED &&
+			position?.x === GAME_GROUP_POSITION
+		) {
 			cameraControlsRef.current?.truck(-GAME_GROUP_POSITION, 0, true);
 		}
 	}, [state]);
