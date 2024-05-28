@@ -6,33 +6,33 @@ Command: npx gltfjsx@6.2.16 rock.glb -t
 
 import { useGLTF } from "@react-three/drei";
 import { RigidBody, type RigidBodyProps } from "@react-three/rapier";
-import * as THREE from "three";
+import { Vector3, type Mesh, type MeshStandardMaterial } from "three";
 import { type GLTF } from "three-stdlib";
 
 import { RIGID_BODY_PROPS } from "../../../consts/rigid-body-props.const";
 
 type GLTFResult = GLTF & {
 	nodes: {
-		Curve: THREE.Mesh;
-		Curve001: THREE.Mesh;
-		Curve002: THREE.Mesh;
-		Curve003: THREE.Mesh;
-		Curve004: THREE.Mesh;
-		Curve005: THREE.Mesh;
-		Curve006: THREE.Mesh;
-		Curve007: THREE.Mesh;
-		Curve008: THREE.Mesh;
+		Curve: Mesh;
+		Curve001: Mesh;
+		Curve002: Mesh;
+		Curve003: Mesh;
+		Curve004: Mesh;
+		Curve005: Mesh;
+		Curve006: Mesh;
+		Curve007: Mesh;
+		Curve008: Mesh;
 	};
 	materials: {
-		["SVGMat.001"]: THREE.MeshStandardMaterial;
-		["SVGMat.002"]: THREE.MeshStandardMaterial;
-		["SVGMat.003"]: THREE.MeshStandardMaterial;
-		["SVGMat.004"]: THREE.MeshStandardMaterial;
-		["SVGMat.005"]: THREE.MeshStandardMaterial;
-		["SVGMat.006"]: THREE.MeshStandardMaterial;
-		["SVGMat.007"]: THREE.MeshStandardMaterial;
-		["SVGMat.008"]: THREE.MeshStandardMaterial;
-		["SVGMat.009"]: THREE.MeshStandardMaterial;
+		["SVGMat.001"]: MeshStandardMaterial;
+		["SVGMat.002"]: MeshStandardMaterial;
+		["SVGMat.003"]: MeshStandardMaterial;
+		["SVGMat.004"]: MeshStandardMaterial;
+		["SVGMat.005"]: MeshStandardMaterial;
+		["SVGMat.006"]: MeshStandardMaterial;
+		["SVGMat.007"]: MeshStandardMaterial;
+		["SVGMat.008"]: MeshStandardMaterial;
+		["SVGMat.009"]: MeshStandardMaterial;
 	};
 };
 
@@ -47,7 +47,7 @@ export function Rock({ groupProps, ...props }: RockProps) {
 		<RigidBody
 			{...RIGID_BODY_PROPS}
 			scale={
-				new THREE.Vector3(
+				new Vector3(
 					Number(RIGID_BODY_PROPS.scale) * (1 / 3) * 2,
 					Number(RIGID_BODY_PROPS.scale) * (1 / 3) * 2,
 					Number(RIGID_BODY_PROPS.scale)

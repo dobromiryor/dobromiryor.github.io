@@ -6,27 +6,27 @@ Command: npx gltfjsx@6.2.16 scissors.glb -t
 
 import { useGLTF } from "@react-three/drei";
 import { RigidBody, type RigidBodyProps } from "@react-three/rapier";
-import * as THREE from "three";
+import { Euler, type Mesh, type MeshStandardMaterial } from "three";
 import { type GLTF } from "three-stdlib";
 
 import { RIGID_BODY_PROPS } from "../../../consts/rigid-body-props.const";
 
 type GLTFResult = GLTF & {
 	nodes: {
-		path1: THREE.Mesh;
-		path3: THREE.Mesh;
-		path4: THREE.Mesh;
-		path5: THREE.Mesh;
-		path6: THREE.Mesh;
-		path7: THREE.Mesh;
+		path1: Mesh;
+		path3: Mesh;
+		path4: Mesh;
+		path5: Mesh;
+		path6: Mesh;
+		path7: Mesh;
 	};
 	materials: {
-		["SVGMat.002"]: THREE.MeshStandardMaterial;
-		["SVGMat.003"]: THREE.MeshStandardMaterial;
-		["SVGMat.005"]: THREE.MeshStandardMaterial;
-		["SVGMat.006"]: THREE.MeshStandardMaterial;
-		["SVGMat.007"]: THREE.MeshStandardMaterial;
-		["SVGMat.008"]: THREE.MeshStandardMaterial;
+		["SVGMat.002"]: MeshStandardMaterial;
+		["SVGMat.003"]: MeshStandardMaterial;
+		["SVGMat.005"]: MeshStandardMaterial;
+		["SVGMat.006"]: MeshStandardMaterial;
+		["SVGMat.007"]: MeshStandardMaterial;
+		["SVGMat.008"]: MeshStandardMaterial;
 	};
 };
 
@@ -37,7 +37,7 @@ interface ScissorsProps extends RigidBodyProps {
 export function Scissors({ groupProps, ...props }: ScissorsProps) {
 	const { nodes, materials } = useGLTF("/models/scissors.glb") as GLTFResult;
 
-	const rotation = new THREE.Euler(Math.PI / 2, Math.PI / 2, 0);
+	const rotation = new Euler(Math.PI / 2, Math.PI / 2, 0);
 
 	return (
 		<RigidBody {...RIGID_BODY_PROPS} {...props}>

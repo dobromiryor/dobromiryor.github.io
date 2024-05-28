@@ -6,7 +6,7 @@ Command: npx gltfjsx@6.2.16 fractured-rock.glb -t
 
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
-import * as THREE from "three";
+import { Vector3, type Mesh, type MeshStandardMaterial } from "three";
 import { type GLTF } from "three-stdlib";
 
 import { FRACTURE_RIGID_BODY_PROPS } from "../../../consts/fracture-rigid-body-props.const";
@@ -15,27 +15,27 @@ import { RIGID_BODY_PROPS } from "../../../consts/rigid-body-props.const";
 
 type GLTFResult = GLTF & {
 	nodes: {
-		Curve_cell: THREE.Mesh;
-		Curve_cell001: THREE.Mesh;
-		Curve_cell002: THREE.Mesh;
-		Curve_cell003: THREE.Mesh;
-		Curve_cell004: THREE.Mesh;
-		Curve_cell005: THREE.Mesh;
-		Curve_cell006: THREE.Mesh;
-		Curve_cell007: THREE.Mesh;
-		Curve_cell010: THREE.Mesh;
-		Curve_cell011: THREE.Mesh;
-		Curve_cell012: THREE.Mesh;
-		Curve_cell013: THREE.Mesh;
-		Curve_cell015: THREE.Mesh;
-		Curve_cell016: THREE.Mesh;
-		Curve_cell017: THREE.Mesh;
-		Curve_cell018: THREE.Mesh;
-		Curve_cell019: THREE.Mesh;
-		Curve_cell020: THREE.Mesh;
+		Curve_cell: Mesh;
+		Curve_cell001: Mesh;
+		Curve_cell002: Mesh;
+		Curve_cell003: Mesh;
+		Curve_cell004: Mesh;
+		Curve_cell005: Mesh;
+		Curve_cell006: Mesh;
+		Curve_cell007: Mesh;
+		Curve_cell010: Mesh;
+		Curve_cell011: Mesh;
+		Curve_cell012: Mesh;
+		Curve_cell013: Mesh;
+		Curve_cell015: Mesh;
+		Curve_cell016: Mesh;
+		Curve_cell017: Mesh;
+		Curve_cell018: Mesh;
+		Curve_cell019: Mesh;
+		Curve_cell020: Mesh;
 	};
 	materials: {
-		["SVGMat.001"]: THREE.MeshStandardMaterial;
+		["SVGMat.001"]: MeshStandardMaterial;
 	};
 };
 
@@ -48,7 +48,7 @@ export function FracturedRock(props: JSX.IntrinsicElements["group"]) {
 		<group
 			{...GROUP_PROPS}
 			scale={
-				new THREE.Vector3(
+				new Vector3(
 					Number(RIGID_BODY_PROPS.scale) * 0.33 * 2,
 					Number(RIGID_BODY_PROPS.scale) * 0.33 * 2,
 					Number(RIGID_BODY_PROPS.scale)
