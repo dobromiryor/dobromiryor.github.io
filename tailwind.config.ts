@@ -12,7 +12,7 @@ export default {
 				a4: "230mm",
 			},
 			animation: {
-				"custom-ping": "1s custom-ping 3s cubic-bezier(0, 0, 0.2, 1)",
+				"custom-ping": "1s custom-ping 300ms cubic-bezier(0, 0, 0.2, 1)",
 				dash: "dash 500ms linear infinite ",
 			},
 			keyframes: {
