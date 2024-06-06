@@ -10,6 +10,7 @@ type PersonalDetails = {
 	website: string;
 	email: string;
 	phone: string;
+	position: string;
 };
 
 type Experience = {
@@ -17,12 +18,14 @@ type Experience = {
 	position: string;
 	period: string;
 	tasks: string[];
+	location: string;
 };
 
 type Education = {
 	field: string;
 	period: string;
 	school: string;
+	location: string;
 };
 
 type Section =
