@@ -11,4 +11,6 @@ export enum Tech {
 	REMIX = "remix",
 	I18N = "i18n",
 	TW = "tailwind",
+	ZUSTAND = "zustand",
+	SWR = "SWR",
 }

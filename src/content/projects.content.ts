@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
 		],
 	},
 	{
-		title: "Weather App",
+		title: "Sol",
 		description:
 			"A weather PWA that shows weather conditions by search or by using the device's location. Made using React.",
 		credits: [
@@ -47,16 +47,17 @@ export const PROJECTS: Project[] = [
 			},
 			{
 				text: "Other icons made by ",
-				name: "Font Awesome",
-				url: "https://fontawesome.com/",
+				name: "Google",
+				url: "https://fonts.google.com/icons/",
 			},
 		],
-		url: "https://dobromiryor.github.io/weather-app/",
+		url: "https://dobromiryor.github.io/sol/",
 		stack: [
-			{ name: "HTML", id: Tech.HTML },
-			{ name: "CSS", id: Tech.CSS },
-			{ name: "JavaScript", id: Tech.JS },
+			{ name: "Typescript", id: Tech.TS },
 			{ name: "React", id: Tech.REACT },
+			{ name: "Zustand", id: Tech.ZUSTAND },
+			{ name: "SWR", id: Tech.SWR },
+			{ name: "Tailwind", id: Tech.TW },
 			{ name: "PWA", id: Tech.PWA },
 		],
 	},

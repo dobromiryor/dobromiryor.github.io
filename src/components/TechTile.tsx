@@ -17,6 +17,8 @@ export const TechTile = ({ tech }: { tech: Tech }) => {
 		remix: "bg-indigo-50 text-black",
 		tailwind: "bg-sky-400 text-white",
 		ts: "bg-blue-600 text-white",
+		zustand: "bg-stone-300 text-blue-700",
+		SWR: "bg-neutral-900 text-gray-100",
 	};
 
 	const baseStyles =
