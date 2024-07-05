@@ -59,6 +59,7 @@ export const Nnnoise = () => {
 			)}
 			height={size}
 			opacity={theme === Theme.DARK ? "0.05" : "0.25"}
+			role="presentation"
 			version="1.1"
 			viewBox={`0 0 ${size} ${size}`}
 			width={size}

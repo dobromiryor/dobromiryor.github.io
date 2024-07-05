@@ -59,10 +59,12 @@ export const Image3D = () => {
 				<div className="relative w-full h-full aspect-square scale-[8]">
 					{state === GameState.INITIAL && (
 						<img
+							alt=""
 							className={clsx(
 								"absolute w-full h-full -z-10 scale-[1.1] opacity-15",
 								"animate-custom-ping"
 							)}
+							role="presentation"
 							src="/images/me.png"
 						/>
 					)}
@@ -70,9 +72,11 @@ export const Image3D = () => {
 						className={clsx(
 							"flex justify-center items-center ",
 							"opacity-0 w-full h-full rounded-full transition-opacity",
-							state === GameState.INITIAL && "hover:opacity-100"
+							state === GameState.INITIAL &&
+								"hover:opacity-100 focus:opacity-100"
 						)}
 						disabled={state !== GameState.INITIAL}
+						tabIndex={1}
 						onClick={() =>
 							state === GameState.INITIAL && setState(GameState.RUNNING)
 						}

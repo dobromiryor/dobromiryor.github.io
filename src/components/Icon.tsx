@@ -31,7 +31,7 @@ export const Icon = ({ icon, className, ...props }: IconProps) => {
 			role="img"
 			{...props}
 		>
-			<img className="w-full h-full" src={svg} />
+			<img alt="" className="w-full h-full" role="presentation" src={svg} />
 		</div>
 	);
 };

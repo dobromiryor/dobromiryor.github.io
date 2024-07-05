@@ -12,7 +12,7 @@ import { NotFound } from "./routes/NotFound";
 function App() {
 	return (
 		<Router hook={useHashLocation}>
-			<div className="relative min-h-screen">
+			<main className="relative min-h-screen">
 				<div className="flex justify-center pb-40 print:pb-0">
 					<Switch>
 						<Route component={Home} path={RouteEnum.HOME} />
@@ -27,7 +27,7 @@ function App() {
 				<Nnnoise />
 
 				<ScrollRestoration />
-			</div>
+			</main>
 		</Router>
 	);
 }

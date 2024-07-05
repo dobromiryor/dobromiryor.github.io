@@ -248,9 +248,12 @@ export const CV = () => {
 								<ul>
 									{sideSection.list.map((item, listIndex) =>
 										item === " " ? (
-											<br
+											<li
 												key={`Side__Section__${sideSection.title}__${sideSection.type}__${index}__Item__Break__${listIndex}`}
-											/>
+												className="opacity-0"
+											>
+												—
+											</li>
 										) : (
 											<li
 												key={`Side__Section__${sideSection.title}__${sideSection.type}__${index}__Item__${item}__${listIndex}`}
