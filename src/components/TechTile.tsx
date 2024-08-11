@@ -18,7 +18,10 @@ export const TechTile = ({ tech }: { tech: Tech }) => {
 		tailwind: "bg-sky-400 text-white",
 		ts: "bg-blue-600 text-white",
 		zustand: "bg-stone-300 text-blue-700",
-		SWR: "bg-neutral-900 text-gray-100",
+		swr: "bg-neutral-900 text-gray-100",
+		supabase: "bg-emerald-800 text-white",
+		pinia: "bg-amber-300 text-gray-900",
+		vue: "text-slate-700 bg-emerald-400",
 	};
 
 	const baseStyles =

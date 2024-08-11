@@ -62,6 +62,20 @@ export const PROJECTS: Project[] = [
 		],
 	},
 	{
+		title: "XOX",
+		description:
+			"A real-time multiplayer tic-tac-toe game built with Vue and Supabase Realtime.",
+		credits: [],
+		url: "https://xox-v2c2.onrender.com/",
+		stack: [
+			{ name: "Typescript", id: Tech.TS },
+			{ name: "Vue", id: Tech.VUE },
+			{ name: "Pinia", id: Tech.PINIA },
+			{ name: "Supabase", id: Tech.SUPABASE },
+			{ name: "Tailwind", id: Tech.TW },
+		],
+	},
+	{
 		title: "Super Brick Game",
 		description:
 			"Simple Tetris game made using JavaScript and styled to mimic the knockoff handheld consoles of the 90s.",

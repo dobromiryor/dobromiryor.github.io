@@ -12,5 +12,8 @@ export enum Tech {
 	I18N = "i18n",
 	TW = "tailwind",
 	ZUSTAND = "zustand",
-	SWR = "SWR",
+	SWR = "swr",
+	VUE = "vue",
+	SUPABASE = "supabase",
+	PINIA = "pinia",
 }
